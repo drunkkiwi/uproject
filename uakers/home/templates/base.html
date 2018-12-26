@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- external -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- default font -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+  </head>
+  <body>
+
+    <div class="full-nav">
+
+      <div class="nav-logo-div">
+        <img class="nav-logo" src="{% static 'assets/uakers-logo.png' %}">
+      </div>
+
+      <div class="nav-menu">
+
+        <a href="#" class="mn-it">
+
+          <i class="fas fa-quote-left mn-i"></i>
+          <span class="mn-tx">confessions</span>
+          <div class="mn-undbar"></div>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>
