@@ -5,7 +5,6 @@ from django.dispatch                    import receiver
 from django.db                          import models
 from .choices                           import *
 
-
 class UserProfile(AbstractUser):
     profile_year        = models.CharField(max_length=2, choices=YCHOICES)
     profile_sex         = models.CharField(max_length=1, choices=SCHOICES)
@@ -23,6 +22,18 @@ class Confessions(models.Model):
     confession_views        = models.IntegerField(default=0)
     confession_created_at   = models.DateTimeField(auto_now_add=True)
     confession_updated_at   = models.DateTimeField(auto_now=True)
+    confession_slug         = models.SlugField(blank=True, max_length=900)
+
+    def save(self, *args, **kwargs):
+        ctitle = self.confession_title
+
+        if not self.id:
+            if Confession.objects.filter(confession_slug=slugify(ctitle)).exists():
+                count = Confession.objects.filter(confession_slug__startswith=slugify(ctitle)).exclude(pk=self.id).count()
+                self.confession_slug = slugify(ctitle + str(count))
+            else:
+                self.confession_slug = slugify(ctitle)
+        super(Confessions, self).save(*args, **kwargs)
 
 
     def __str__(self):

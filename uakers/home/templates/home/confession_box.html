@@ -1,19 +1,24 @@
 <div class="confession_box">
 
-  <a class="co-up" href="#">
-    <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})">
-    </div>
+  <div class="co-main">
+    <a class="co-up" href="#">
+      <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})">
+      </div>
 
-    <div class="co-up-text">
-      <p class="co-aut">{{ cons.confession_author.username }}          -- {{ cons.confession_author.profile_year }}</p>
-      <span class="co-title">{{ cons.confession_title|truncatechars:60 }}</span>
-    </div>
-  </a>
+      <div class="co-up-text">
+        <div class="co-aut-year">
+          <p class="co-aut">{{ cons.confession_author.username }}</p>
+          <span class="co-year">{{ cons.confession_author.get_profile_year_display }}</span>
+        </div>
+        <span class="co-title">{{ cons.confession_title|truncatechars:60 }}</span>
+      </div>
+    </a>
 
-  <div class="co-down-text">
-    <p class="co-body">
-      {{ cons.confession_body|truncatewords:60 }}
-    </p>
+    <div class="co-down-text">
+      <p class="co-body">
+        {{ cons.confession_body|truncatewords:60 }}
+      </p>
+    </div>
   </div>
 
   <div class="co-rank">
