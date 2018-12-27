@@ -15,6 +15,7 @@
   --main-highlight-color: #ff0058;
 
   --main-background-color: #0C0E11;
+  --opaque-background-color: rgba(0, 0, 0, 0.6);
 
   /* Darker shades */
   --darker-background-color: #090A0D;
@@ -35,6 +36,16 @@ body {
 
 a, a:link, a:visited, a:hover {
   text-decoration: none;
+}
+
+input, select {
+  background: none;
+  outline: none;
+  border: none;
+}
+
+textarea {
+  resize: none;
 }
 
 .full-nav {
@@ -100,6 +111,7 @@ a, a:link, a:visited, a:hover {
   color: var(--main-text-color);
   font-size: 20px;
   margin-left: 10px;
+  text-transform: lowercase;
 }
 
 .mn-undbar {

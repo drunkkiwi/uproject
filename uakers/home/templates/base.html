@@ -7,6 +7,9 @@
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
 
+    <!-- icon -->
+    <link href="{% static 'assets/uakers-icon.png' %}" rel="shortcut icon" type="image/png" >
+
     <!-- responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -41,11 +44,38 @@
 
         <a href="#" class="mn-it">
 
+          <i class="fas fa-beer mn-i"></i>
+          <span class="mn-tx">ratings</span>
+          <div class="mn-undbar"></div>
+
+        </a>
+
+        {% if user.is_authenticated %}
+        <a href="#" class="mn-it">
+
           <i class="fas fa-user-astronaut mn-i"></i>
           <span class="mn-tx">profile</span>
           <div class="mn-undbar"></div>
 
         </a>
+
+        <a href="{% url 'home:log_out' %}" class="mn-it">
+
+          <i class="fas fa-basketball-ball mn-i"></i>
+          <span class="mn-tx">log out</span>
+          <div class="mn-undbar"></div>
+
+        </a>
+        {% else %}
+        <a href="{% url 'home:register' %}" class="mn-it">
+
+          <i class="fas fa-mug-hot mn-i"></i>
+          <span class="mn-tx">sign up / login</span>
+          <div class="mn-undbar"></div>
+
+        </a>
+
+        {% endif %}
 
       </div>
 

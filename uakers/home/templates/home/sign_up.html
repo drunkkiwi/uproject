@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Uakers signup{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home/css/sign_up.css' %}">
+{% endblock %}
+
+{% block body %}
+  <div class="rest-reg">
+
+    <form class="reg-form" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="reg-cont">
+      <div class="reg-label">
+        {{ field.label_tag }}
+      </div>
+      <div class="reg-inp">
+        {{ field }}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="reg-cont-btn">
+      <button class="reg-btn" type="submit">Register</button>
+    </div>
+  </form>
+
+  </div>
+{% endblock %}

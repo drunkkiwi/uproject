@@ -1,0 +1,30 @@
+<form class="confession_box_post" action="{% url 'home:co_post' %}" method="post">
+
+  {% csrf_token %}
+
+  <div class="co-main">
+    <div class="co-up" href="#">
+      <div class="co_photo" style="background-image: url({{ request.user.profile_image }})">
+      </div>
+
+      <div class="co-up-text">
+        <div class="co-aut-year">
+          <p class="co-aut">{{ request.user.username }}</p>
+          <span class="co-year">{{ request.user.get_profile_year_display }}</span>
+        </div>
+        <span class="co-title">{{ co_form.confession_title }}</span>
+      </div>
+    </div>
+
+    <div class="co-down-text-post">
+      <div class="co-body co-bd-post">
+        {{ co_form.confession_body }}
+      </div>
+    </div>
+    <div class="co-post">
+      <button class="co-post-btn" type="submit">Submit confession</button>
+    </div>
+  </div>
+
+
+</form>
