@@ -1,12 +1,16 @@
-<form class="confession_box_post" action="{% url 'home:co_post' %}" method="post">
+<!-- ------------ Post confession box --------------------------------------- -->
+<form class="confession_box_post" action="{% url 'home:confession_post_view' %}" method="post">
 
   {% csrf_token %}
 
+<!-- ------------------- Main wrapper after form ------------------------- -->
   <div class="co-main">
+    <!-- -- The part that is above everything in the div, eg. photo and username -- -->
     <div class="co-up" href="#">
       <div class="co_photo" style="background-image: url({{ request.user.profile_image }})">
       </div>
 
+      <!-- ------ User username, grad year, and title post input ---- -->
       <div class="co-up-text">
         <div class="co-aut-year">
           <p class="co-aut">{{ request.user.username }}</p>
@@ -15,7 +19,9 @@
         <span class="co-title">{{ co_form.confession_title }}</span>
       </div>
     </div>
+    <!-- -------------- end of the "Above" part ------------------ -->
 
+    <!-- The body / down part, with things like confession body form and submit button -- -->
     <div class="co-down-text-post">
       <div class="co-body co-bd-post">
         {{ co_form.confession_body }}
@@ -25,6 +31,7 @@
       <button class="co-post-btn" type="submit">Submit confession</button>
     </div>
   </div>
+  <!-- ----------------------- end of bottom area --------------------------- -->
 
 
 </form>

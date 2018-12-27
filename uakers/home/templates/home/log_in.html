@@ -1,1 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %} Uakers login {% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home/css/auth_views.css' %}">
+{% endblock %}
+
+{% block body %}
+  <!-- ------- Rest of the page, 100vh -------------- -->
+  <div class="rest-auth">
+    {% include 'home/auth_box.html' %}
+    <p class="o-auth">
+      Don't have an account already? Sign up <a class="o-auth-emp" href="{% url 'home:sign_up_view' %}">here</a>
+    </p>
+  </div>
+{% endblock %}

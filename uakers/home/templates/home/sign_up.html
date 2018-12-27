@@ -3,28 +3,15 @@
 {% block title %}Uakers signup{% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'home/css/sign_up.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/auth_views.css' %}">
 {% endblock %}
 
 {% block body %}
-  <div class="rest-reg">
-
-    <form class="reg-form" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="reg-cont">
-      <div class="reg-label">
-        {{ field.label_tag }}
-      </div>
-      <div class="reg-inp">
-        {{ field }}
-      </div>
-    </div>
-    {% endfor %}
-    <div class="reg-cont-btn">
-      <button class="reg-btn" type="submit">Register</button>
-    </div>
-  </form>
-
+  <!-- ------- Rest of the page, 100vh -------------- -->
+  <div class="rest-auth">
+    {% include 'home/auth_box.html' %}
+    <p class="o-auth">
+      Already have an account? Log in <a class="o-auth-emp" href="{% url 'home:log_in_view' %}">here</a>
+    </p>
   </div>
 {% endblock %}

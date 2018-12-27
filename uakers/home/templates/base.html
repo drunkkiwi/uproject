@@ -59,7 +59,7 @@
 
         </a>
 
-        <a href="{% url 'home:log_out' %}" class="mn-it">
+        <a href="{% url 'home:log_out_view' %}" class="mn-it">
 
           <i class="fas fa-basketball-ball mn-i"></i>
           <span class="mn-tx">log out</span>
@@ -67,7 +67,7 @@
 
         </a>
         {% else %}
-        <a href="{% url 'home:register' %}" class="mn-it">
+        <a href="{% url 'home:log_in_view' %}" class="mn-it">
 
           <i class="fas fa-mug-hot mn-i"></i>
           <span class="mn-tx">sign up / login</span>

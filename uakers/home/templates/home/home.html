@@ -11,14 +11,17 @@
 
 {% block body %}
 
+  <!-- -------------- The div that wraps the rest of the page ------------------- !-->
   <div class="full-underlier">
 
+    <!-- ---------------- if there is a user, serve the confession forms ------ !-->
     {% if request.user.is_authenticated %}
     <div class="post-conf">
       {% include 'home/post_confession.html' %}
     </div>
     {% endif %}
 
+    <!-- ---------------- The full grid of all the confessions -------------- !-->
     <div class="full-grid">
       {% for cons in all_conf %}
       {% include 'home/confession_box.html' %}
