@@ -1,0 +1,35 @@
+<div class="confession_box">
+
+  <a class="co-up" href="#">
+    <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})">
+    </div>
+
+    <div class="co-up-text">
+      <p class="co-aut">{{ cons.confession_author.username }}          -- {{ cons.confession_author.profile_year }}</p>
+      <span class="co-title">{{ cons.confession_title|truncatechars:60 }}</span>
+    </div>
+  </a>
+
+  <div class="co-down-text">
+    <p class="co-body">
+      {{ cons.confession_body|truncatewords:60 }}
+    </p>
+  </div>
+
+  <div class="co-rank">
+    <div class="co-upd-div">
+      <a class="co-upd" href="#">
+        <i class="fas fa-arrow-up"></i>
+      </a>
+      <a class="co-upd" href="#">
+        <i class="fas fa-arrow-down"></i>
+      </a>
+    </div>
+    <div class="co-upd-i">
+      <p class="co-upd-iu"><span class="co-emp">{{ cons.confession_upvotes }}</span> likes</p>
+      <span class="co-upd-iv">{{ cons.confession_views}} views</span>
+    </div>
+  </div>
+
+
+</div>

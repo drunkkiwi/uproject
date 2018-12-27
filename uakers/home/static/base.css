@@ -24,22 +24,23 @@
 
   /* Text color */
   --main-text-color: #fefefe;
+  --soothed-text-color: #DFE8EB;
 
 }
 
 body {
   background-color: var(--main-background-color);
-  padding-top: 45px;
+  padding-top: 50px;
 }
 
 a, a:link, a:visited, a:hover {
-  color: var(--main-text-color);
   text-decoration: none;
 }
 
 .full-nav {
-  height: 55px;
-  max-height: 55px;
+  height: 50px;
+  max-height: 50px;
+  background-color: var(--main-background-color);
 
   position: absolute;
   top: 0px;
@@ -87,6 +88,7 @@ a, a:link, a:visited, a:hover {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin: 0 15px;
 }
 
 .mn-i {
@@ -106,9 +108,37 @@ a, a:link, a:visited, a:hover {
   position: absolute;
   bottom: 0px;
   left: 0px;
-  background-color: var(--main-highlight-color);
+  background-color: var(--main-text-color);
 }
 
 .mn-it:hover .mn-undbar {
   width: 100%;
+}
+
+.mn-underbar-up {
+  width: 100%;
+  background-color: var(--main-highlight-color);
+}
+
+
+
+/* =============== WEBKIT SCROLLBAR =====================*/
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--darker-background-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--lighter-background-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lighter-background-color);
 }

@@ -18,6 +18,8 @@
 
     <!-- css -->
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block css %}
+    {% endblock %}
   </head>
   <body>
 
@@ -29,10 +31,18 @@
 
       <div class="nav-menu">
 
-        <a href="#" class="mn-it">
+        <a href="{% url 'home:home_view' %}" class="mn-it">
 
           <i class="fas fa-quote-left mn-i"></i>
           <span class="mn-tx">confessions</span>
+          <div class="mn-undbar {% block mn-co-underbar-up %}{% endblock %}"></div>
+
+        </a>
+
+        <a href="#" class="mn-it">
+
+          <i class="fas fa-user-astronaut mn-i"></i>
+          <span class="mn-tx">profile</span>
           <div class="mn-undbar"></div>
 
         </a>
@@ -41,5 +51,12 @@
 
     </div>
 
+    {% block body %}
+
+    {% endblock %}
+
+
+    {% block js %}
+    {% endblock %}
   </body>
 </html>

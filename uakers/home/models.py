@@ -7,7 +7,6 @@ from .choices                           import *
 
 
 class UserProfile(AbstractUser):
-
     profile_year        = models.CharField(max_length=2, choices=YCHOICES)
     profile_sex         = models.CharField(max_length=1, choices=SCHOICES)
     profile_image       = models.CharField(max_length=700, blank=True)
@@ -17,11 +16,13 @@ class UserProfile(AbstractUser):
 
 
 class Confessions(models.Model):
-    confession_author  = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
-    confession_title   = models.CharField(max_length=100)
-    confession_body    = models.TextField(blank=False, null=False)
-    confession_upvotes = models.IntegerField(default=0)
-    confession_views   = models.IntegerField(default=0)
+    confession_author       = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    confession_title        = models.CharField(max_length=100)
+    confession_body         = models.TextField(blank=False, null=False)
+    confession_upvotes      = models.IntegerField(default=0)
+    confession_views        = models.IntegerField(default=0)
+    confession_created_at   = models.DateTimeField(auto_now_add=True)
+    confession_updated_at   = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
