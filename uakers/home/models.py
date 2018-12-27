@@ -28,8 +28,8 @@ class Confessions(models.Model):
         ctitle = self.confession_title
 
         if not self.id:
-            if Confession.objects.filter(confession_slug=slugify(ctitle)).exists():
-                count = Confession.objects.filter(confession_slug__startswith=slugify(ctitle)).exclude(pk=self.id).count()
+            if Confessions.objects.filter(confession_slug=slugify(ctitle)).exists():
+                count = Confessions.objects.filter(confession_slug__startswith=slugify(ctitle)).exclude(pk=self.id).count()
                 self.confession_slug = slugify(ctitle + str(count))
             else:
                 self.confession_slug = slugify(ctitle)
