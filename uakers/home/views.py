@@ -2,16 +2,22 @@ from django.shortcuts       import render, redirect
 from .models                import Confessions
 from .forms                 import SignUpForm, ConfessionsForm
 from django.contrib.auth    import login, authenticate, logout
+from django.core.paginator  import EmptyPage, PageNotAnInteger, Paginator
 
 
-# -------------- HOME VIEW ----------------------------
+# -------------- HOME VIEW / CONFESSION VIEW ----------------------------
 def home_view(request):
     all_conf = Confessions.objects.all().order_by('-id')
 
     co_form = ConfessionsForm()
 
+    paginator = Paginator(all_conf, 20)
+
+    page = request.GET.get('page')
+    paginated = paginator.get_page(page)
+
     context = {
-        'all_conf': all_conf,
+        'all_conf': paginated,
         'co_form': co_form,
     }
     return render(request, 'home/home.html', context)

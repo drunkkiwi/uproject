@@ -60,11 +60,11 @@ body {
 }
 
 input, select {
-  background-color: var(--darker-background-color);
+  background-color: var(--opaque-background-color);
   color: var(--soothed-text-color);
   padding: 3px 12px 3px 8px;
-  border: 1px solid var(--darker-background-color);
-  border-radius: 2px;
+  border: 1px solid var(--opaque-background-color);
+  border-radius: 4px;
 }
 
 input:focus, select:focus {

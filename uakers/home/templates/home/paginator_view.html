@@ -1,0 +1,29 @@
+{% if Articles.next_page_number is not 1 %}
+<div class="pag-reference-div">
+  <div class="pag-reference">
+    {% if all_conf.has_previous %}
+    <div class="pag-previous">
+      <a href="?page=1">
+        <i class="fas fa-angle-double-left pag-icon"></i>
+      </a>
+      <a href="?page={{ all_conf.previous_page_number }}">
+        <i class="fas fa-angle-left pag-icon"></i>
+      </a>
+    </div>
+    {% endif %}
+
+    <p class="pag-current">
+      Page <span class="act-pg">{{ all_conf.number }}</span> of {{ all_conf.paginator.num_pages }}.
+    </p>
+
+    {% if Articles.has_next %}
+    <a href="?page={{ all_conf.next_page_number }}">
+      <i class="fas fa-angle-right pag-icon pir"></i>
+    </a>
+    <a href="?page={{ all_conf.paginator.num_pages }}">
+      <i class="fas fa-angle-double-right pag-icon pir"></i>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
