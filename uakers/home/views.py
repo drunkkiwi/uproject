@@ -15,10 +15,23 @@ def home_view(request):
 
     page = request.GET.get('page')
     paginated = paginator.get_page(page)
+    pg_number = []
+
+    for post in paginated:
+        pg_number.append(post)
+
+    pg_nr_odd = False;
+    pg_number = len(pg_number)
+    if (pg_number%2) is 0:
+        pg_nr_odd = False
+    else:
+        pg_nr_odd = True
+
 
     context = {
         'all_conf': paginated,
         'co_form': co_form,
+        'pg_nr_odd': pg_nr_odd,
     }
     return render(request, 'home/home.html', context)
 

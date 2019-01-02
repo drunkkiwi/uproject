@@ -2,31 +2,36 @@
   margin: 0;
   padding: 0;
 
-  font-family: 'Raleway', sans-serif;
-  font-size: 18px;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 16px;
 
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   text-decoration: none;
 }
 
 
 :root {
-  /* Colors */
-  --main-highlight-color: #ff0058;
 
-  --main-background-color: #0C0E11;
+  /* ------------- Colors ---------------- */
+
+  --main-highlight-color: #ff0058;
+  --opaque-highlight-color: rgba(255, 0, 88, 0.6);
+  --secondary-highlight-color: #ff4021;
+
+  /*------ Main background colors ------*/
+  --main-background-color: #070707;
   --opaque-background-color: rgba(0, 0, 0, 0.6);
 
-  /* Darker shades */
-  --darker-background-color: #090A0D;
+    /*---------- Darker shades ------------*/
+  --darker-background-color: #000000;
+  --upto-darker-background-color: #050505;
 
-  /* Lighter shades */
-  --lighter-background-color: #121519;
+  /*  ----------- Lighter shades ---------- */
+  --lighter-background-color: #0C0E11;
 
-  /* Text color */
+  /* ------------ text color ------------- */
   --main-text-color: #fefefe;
   --soothed-text-color: #DFE8EB;
-
 }
 
 body {
@@ -48,10 +53,14 @@ textarea {
   resize: none;
 }
 
+.ff-num {
+  font-family: 'Quicksand', sans-serif;
+}
+
 .full-nav {
   height: 50px;
   max-height: 50px;
-  background-color: var(--main-background-color);
+  background-color: var(--darker-background-color);
 
   position: absolute;
   top: 0px;
@@ -129,7 +138,7 @@ textarea {
 
 .mn-underbar-up {
   width: 100%;
-  background-color: var(--main-highlight-color);
+  background-image: linear-gradient(-90deg, var(--secondary-highlight-color), var(--main-highlight-color));
 }
 
 

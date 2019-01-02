@@ -62,13 +62,23 @@ body {
 input, select {
   background-color: var(--opaque-background-color);
   color: var(--soothed-text-color);
-  padding: 3px 12px 3px 8px;
   border: 1px solid var(--opaque-background-color);
-  border-radius: 4px;
+  border-radius: 2px;
+  padding: 3px 12px 3px 8px;
 }
 
 input:focus, select:focus {
-  border-color: var(--main-highlight-color);
+  border: 1px solid var(--opaque-highlight-color);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px var(--main-background-color) inset;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px var(--main-background-color) inset;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
 }
 
 .auth-cont-btn {

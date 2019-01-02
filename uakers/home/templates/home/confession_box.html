@@ -15,9 +15,7 @@
     </a>
 
     <div class="co-down-text">
-      <p class="co-body">
-        {{ cons.confession_body|truncatewords:60 }}
-      </p>
+      {{ cons.confession_body|linebreaks|truncatewords:60 }}
     </div>
   </div>
 
@@ -31,8 +29,8 @@
       </a>
     </div>
     <div class="co-upd-i">
-      <p class="co-upd-iu"><span class="co-emp">{{ cons.confession_upvotes }}</span> likes</p>
-      <span class="co-upd-iv">{{ cons.confession_views}} views</span>
+      <p class="co-upd-iu"><span class="co-emp ff-num">{{ cons.confession_upvotes }}</span> upvotes</p>
+      <p class="co-upd-iv"><span class="ff-num">{{ cons.confession_views}}</span> views</p>
     </div>
   </div>
 

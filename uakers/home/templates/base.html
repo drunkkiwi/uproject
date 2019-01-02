@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <!-- default font -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="{% static 'base.css' %}">
@@ -36,7 +37,7 @@
 
         <a href="{% url 'home:home_view' %}" class="mn-it">
 
-          <i class="fas fa-quote-left mn-i"></i>
+          <i class="fas fa-gamepad mn-i"></i>
           <span class="mn-tx">confessions</span>
           <div class="mn-undbar {% block mn-co-underbar-up %}{% endblock %}"></div>
 
@@ -70,7 +71,7 @@
         <a href="{% url 'home:log_in_view' %}" class="mn-it">
 
           <i class="fas fa-mug-hot mn-i"></i>
-          <span class="mn-tx">sign up / login</span>
+          <span class="mn-tx">log in | sign up</span>
           <div class="mn-undbar {% block liv_su_underbar %}{% endblock %}"></div>
 
         </a>

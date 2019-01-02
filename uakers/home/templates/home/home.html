@@ -39,6 +39,10 @@
       {% include 'home/confession_box.html' %}
       {% endfor %}
 
+      {% if pg_nr_odd %}
+      {% include 'home/container_confession_box.html' %}
+      {% endif %}
+
     </div>
 
     <!-- ------------------------- Paginator -------------------------- -->

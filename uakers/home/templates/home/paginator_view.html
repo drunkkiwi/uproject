@@ -16,12 +16,12 @@
       Page <span class="act-pg">{{ all_conf.number }}</span> of {{ all_conf.paginator.num_pages }}.
     </p>
 
-    {% if Articles.has_next %}
+    {% if all_conf.has_next %}
     <a href="?page={{ all_conf.next_page_number }}">
-      <i class="fas fa-angle-right pag-icon pir"></i>
+      <i class="fas fa-angle-right pir"></i>
     </a>
     <a href="?page={{ all_conf.paginator.num_pages }}">
-      <i class="fas fa-angle-double-right pag-icon pir"></i>
+      <i class="fas fa-angle-double-right pir"></i>
     </a>
     {% endif %}
   </div>
