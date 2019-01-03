@@ -50,12 +50,10 @@
 .co-down {
   box-sizing: border-box;
   padding: 10px 30px 10px 40px;
-}
-
-.co-down-text {
   color: var(--soothed-text-color);
   font-size: 17px;
 }
+
 
 .co-rank {
   display: flex;
@@ -73,7 +71,7 @@
   align-items: center;
 }
 
-.co-vote-i {
+.co-upd-i {
   color: var(--soothed-text-color);
   font-size: 18px;
   margin-right: 30px;
@@ -84,18 +82,18 @@
   color: var(--main-highlight-color);
 }
 
-.co-vote-i-active {
+.co-upd-i-active {
   color: var(--main-highlight-color);
 }
 
-.co-rank-text {
+.co-upd-info {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.co-rank-text-s {
+.co-upd-iu {
   color: var(--soothed-text-color);
   font-size: 16px;
   margin-left: 30px;

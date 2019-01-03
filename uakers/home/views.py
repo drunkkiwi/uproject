@@ -3,7 +3,7 @@ from .models                import Confessions
 from .forms                 import SignUpForm, ConfessionsForm
 from django.contrib.auth    import login, authenticate, logout
 from django.core.paginator  import EmptyPage, PageNotAnInteger, Paginator
-from django.http            import HttpResponseRedirect
+from django.http            import JsonResponse
 
 
 # -------------- HOME VIEW / CONFESSION VIEW ----------------------------
@@ -77,6 +77,7 @@ def upvote_view(request, confession_slug):
 
     upvote_confession = Confessions.objects.get(confession_slug=confession_slug)
     upvote_confession_author = upvote_confession.confession_author
+    alert_message = False
 
     if request.user.is_authenticated:
         if not request.user == upvote_confession_author:
@@ -84,6 +85,7 @@ def upvote_view(request, confession_slug):
                 upvote_confession.confession_upvotes.remove(request.user)
                 upvote_confession.confession_upvotes_int -= 1
                 upvote_confession.save()
+                alert_message = "Unupvoted"
             else:
                 upvote_confession.confession_upvotes.add(request.user)
                 if request.user in upvote_confession.confession_downvotes.all():
@@ -91,17 +93,28 @@ def upvote_view(request, confession_slug):
                     upvote_confession.confession_upvotes_int += 1
                 upvote_confession.confession_upvotes_int += 1
                 upvote_confession.save()
+                alert_message = "Upvoted"
+
+        else:
+            alert_message = "Selfupvote"
 
     else:
-        return redirect(request.META['HTTP_REFERER'])
+        alert_message = "NotLogedIn"
 
-    return redirect(request.META['HTTP_REFERER'])
+    alert_upvote_int = upvote_confession.confession_upvotes_int
+
+    data = {
+        'alert_state': alert_message,
+        'alert_upvote_state': alert_upvote_int
+    }
+    return JsonResponse(data)
 
 
 def downvote_view(request, confession_slug):
 
     downvote_confession = Confessions.objects.get(confession_slug=confession_slug)
     downvote_confession_author = downvote_confession.confession_author
+    alert_message = False
 
     if request.user.is_authenticated:
         if not request.user == downvote_confession_author:
@@ -109,6 +122,7 @@ def downvote_view(request, confession_slug):
                 downvote_confession.confession_downvotes.remove(request.user)
                 downvote_confession.confession_upvotes_int += 1
                 downvote_confession.save()
+                alert_message = "Undownvoted"
             else:
                 downvote_confession.confession_downvotes.add(request.user)
                 if request.user in downvote_confession.confession_upvotes.all():
@@ -116,11 +130,20 @@ def downvote_view(request, confession_slug):
                     downvote_confession.confession_upvotes_int -= 1
                 downvote_confession.confession_upvotes_int -= 1
                 downvote_confession.save()
+                alert_message = "Downvoted"
+        else:
+            alert_message = "Selfupvote"
 
     else:
-        return redirect(request.META['HTTP_REFERER'])
+        alert_message = "NotLoggedIn"
 
-    return redirect(request.META['HTTP_REFERER'])
+    alert_upvote_int = downvote_confession.confession_upvotes_int
+
+    data = {
+        'alert_state': alert_message,
+        'alert_upvote_state': alert_upvote_int
+    }
+    return JsonResponse(data)
 
 
 # ------------ AUTHENTICATION VIEWS ------------------------

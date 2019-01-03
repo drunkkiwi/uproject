@@ -32,7 +32,7 @@
   align-items: center;
   background-color: var(--darker-background-color);
   border: 1px solid var(--lighter-background-color);
-  border-bottom: 0.1px solid var(--main-highlight-color);
+  border-bottom: 0.1px solid var(--opaque-highlight-color);
 }
 
 .area-an-text {
@@ -152,6 +152,13 @@
 
 .co-upd-i-active {
   color: var(--main-highlight-color);
+}
+
+.co-upd-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--soothed-text-color);
 }
 
 .co-upd-iu {
