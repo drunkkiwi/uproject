@@ -1,0 +1,26 @@
+.co-up {
+  position: relative;
+}
+
+.co-photo-div {
+  position: absolute;
+  left: 15px;
+  top:15px;
+}
+
+.co-meta-usr-date {
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+}
+
+.co-meta-title-div {
+  margin-top: 30px;
+  padding-left: 10px;
+}
+
+.rest-div {
+  box-sizing: border-box;
+  padding: 0px;
+  padding: 15px;
+}

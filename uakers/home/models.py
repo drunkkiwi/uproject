@@ -6,9 +6,9 @@ from django.db                          import models
 from .choices                           import *
 
 class UserProfile(AbstractUser):
-    profile_year        = models.CharField(max_length=2, choices=YCHOICES)
-    profile_sex         = models.CharField(max_length=1, choices=SCHOICES)
-    profile_image       = models.CharField(max_length=700, blank=True)
+    profile_year            = models.CharField(max_length=2, choices=YCHOICES)
+    profile_sex             = models.CharField(max_length=1, choices=SCHOICES)
+    profile_image           = models.CharField(max_length=700, blank=True)
 
     def __str__(self):
         return self.username + ', ' + self.profile_year + ', ' + self.profile_sex

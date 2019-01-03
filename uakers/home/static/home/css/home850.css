@@ -1,0 +1,15 @@
+.confession_box:nth-child(odd) {
+  margin: 0px;
+}
+
+.confession_box {
+  width: 90%;
+  margin: 0px;
+  border-width: 2px;
+  border-color: var(--lighter-background-color);
+  margin-bottom: 5px;
+}
+
+.non-show-post-wrapper {
+  margin: 0px;
+}

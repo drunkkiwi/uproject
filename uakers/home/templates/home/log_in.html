@@ -3,6 +3,12 @@
 {% block title %} Uakers login {% endblock %}
 {% block liv_su_underbar %}mn-underbar-up{% endblock %}
 
+{% block external %}
+  {% if request.user.is_authenticated %}
+      <meta http-equiv="REFRESH" content="0;url={% url 'home:home_view' %}">
+  {% endif %}
+{% endblock %}
+
 {% block css %}
   <link rel="stylesheet" href="{% static 'home/css/auth_views.css' %}">
 {% endblock %}

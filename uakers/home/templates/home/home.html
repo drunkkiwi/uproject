@@ -5,8 +5,12 @@
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/home850.css' %}" media="screen and (min-width: 0px) and (max-width: 850px)">
 {% endblock %}
 
+{% block external %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+{% endblock %}
 {% block mn-co-underbar-up %}mn-underbar-up{% endblock %}
 
 {% block body %}
@@ -16,7 +20,7 @@
   <div class="non-show-container">
     <div class="non-show-post-wrapper">
       <span class="ns-text">Click this bar to confess</span>
-      <div class="post-conf post-conf-zero">
+      <div class="post-conf post-conf-zero animated">
         {% include 'home/post_confession.html' %}
       </div>
     </div>

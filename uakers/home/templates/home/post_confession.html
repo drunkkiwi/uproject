@@ -4,17 +4,17 @@
   {% csrf_token %}
 
 <!-- ------------------- Main wrapper after form ------------------------- -->
-  <div class="co-main">
+  <div class="co-main-post">
     <!-- -- The part that is above everything in the div, eg. photo and username -- -->
-    <div class="co-up" href="#">
+    <div class="co-up-post">
+
       <div class="co_photo" style="background-image: url({{ request.user.profile_image }})">
       </div>
 
       <!-- ------ User username, grad year, and title post input ---- -->
-      <div class="co-up-text">
-        <div class="co-aut-year">
+      <div class="co-up-text-post">
+        <div class="co-aut-year-post">
           <p class="co-aut">{{ request.user.username }}</p>
-          <span class="co-year">{{ request.user.get_profile_year_display }}</span>
         </div>
         <span class="co-title">{{ co_form.confession_title }}</span>
       </div>
@@ -28,6 +28,7 @@
       </div>
     </div>
     <div class="co-post">
+      <span class="co-emoji">Press (Win + ;) to use emojis</span>
       <button class="co-post-btn" type="submit">Submit confession</button>
     </div>
   </div>

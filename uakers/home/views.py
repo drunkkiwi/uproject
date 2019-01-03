@@ -46,24 +46,59 @@ def confession_post_view(request):
 
     return redirect('home:home_view')
 
+# ---------------- CONFESSION UNIQUE VIEW ------------------
+def confession_view(request, confession_slug):
+    cookieset = 'viewed_confession' + confession_slug
+
+    unique_confession = Confessions.objects.get(confession_slug=confession_slug)
+
+    if cookieset in request.COOKIES:
+        if request.COOKIES[cookieset] == 'yes':
+            pass
+        else:
+            unique_confession.confession_views += 1;
+            unique_confession.save()
+    else:
+        unique_confession.confession_views += 1;
+        unique_confession.save()
+
+    context = {
+        'unique_confession': unique_confession,
+    }
+
+    response = render(request, 'home/confession_view.html', context)
+    response.set_cookie(cookieset, 'yes')
+    return response
+
+
+# --------------------- Upvote confession -----------------------
+#def upvote_view(request, confession_slug):
+
+#    upvote_confession = Confessions.objects.get(confession_slug=confession_slug)
+
+
+
 # ------------ AUTHENTICATION VIEWS ------------------------
 
 #-------------- LOGIN VIEW ---------------------------------
 
 # ---------------- SIGN UP VIEW ----------------------------
 def sign_up_view(request):
-    sign_up_btn = 'Sign up'
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home:home_view')
+    if not request.user.is_authenticated:
+        sign_up_btn = 'Sign up'
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect('home:home_view')
+        else:
+            form = SignUpForm()
     else:
-        form = SignUpForm()
+        return redirect('home:home_view');
 
     context = {
         'form': form,
@@ -76,4 +111,4 @@ def sign_up_view(request):
 #------------------- LOG OUT VIEW ------------------------
 def log_out_view(request):
     logout(request)
-    return redirect('home:home_view')
+    return redirect('home:log_in_view')

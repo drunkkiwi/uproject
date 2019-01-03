@@ -7,6 +7,8 @@
 
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+
+  box-sizing: border-box;
 }
 
 
@@ -32,6 +34,7 @@
   /* ------------ text color ------------- */
   --main-text-color: #fefefe;
   --soothed-text-color: #DFE8EB;
+  --opaque-text-color: rgba(255, 255, 255, 0.6);
 }
 
 body {
@@ -78,7 +81,7 @@ textarea {
   height: 100%;
   box-sizing: border-box;
   display: inline-block;
-  padding: 5px 0px 5px 20px;
+  padding: 5px 0px 5px 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,7 +121,7 @@ textarea {
 
 .mn-tx {
   color: var(--main-text-color);
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 10px;
   text-transform: lowercase;
 }
@@ -146,7 +149,7 @@ textarea {
 /* =============== WEBKIT SCROLLBAR =====================*/
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 /* Track */

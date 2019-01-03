@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ unique_confession.confession_title }}{% endblock %}
+
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home/css/confession_view.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/confession_view900.css' %}" media="screen and (min-width: 0px) and (max-width: 900px)">
+{% endblock %}
+
+{% block body %}
+
+  <div class="rest-div">
+    <div class="co-unique">
+
+      <div class="co-up">
+        <div class="co-photo-div">
+          <div class="co-photo" style="background-image: url({{ unique_confession.confession_author.profile_image }})"></div>
+        </div>
+        <div class="co-meta-text">
+          <div class="co-meta-usr-date">
+            <span class="co-meta-usr">
+              {{ unique_confession.confession_author.username }}
+            </span>
+            <span class="co-meta-date ff-num">
+              {{ unique_confession.confession_created_at|timesince }} ago
+            </span>
+          </div>
+
+          <div class="co-meta-title-div">
+            <p class="co-meta-title">{{ unique_confession.confession_title }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-down">
+        <p class="co-down-text">
+          {{ unique_confession.confession_body }}
+        </p>
+      </div>
+
+      <div class="co-rank">
+        <div class="co-vote">
+          <a href="#">
+            <i class="fas fa-arrow-up co-vote-i"></i>
+          </a>
+          <a href="#">
+            <i class="fas fa-arrow-down co-vote-i"></i>
+          </a>
+        </div>
+
+        <div class="co-rank-text">
+          <p class="co-rank-text-s">
+            <span class="ff-emp">{{ unique_confession.confession_upvotes }}</span>
+            {% if unique_confession.confession_upvotes is 1 %} upvote {% else %} upvotes {% endif %}
+          </p>
+          <p class="co-rank-text-s">{{ unique_confession.confession_views }}
+            {% if unique_confession.confession_views is 1 %} view {% else %} views {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,18 +1,20 @@
 <div class="confession_box">
 
   <div class="co-main">
-    <a class="co-up" href="#">
-      <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})">
+    <div class="co-up">
+      <div class="co_photo_meta_div">
+        <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></div>
+        <div class="co-aut-year">
+          <p class="co-aut">{{ cons.confession_author.username }}</p>
+          <span class="co-year ff-num">{{ cons.confession_created_at|timesince }} ago</span>
+          <span class="co-year ff-num">#{{ cons.id }}</span>
+        </div>
       </div>
 
       <div class="co-up-text">
-        <div class="co-aut-year">
-          <p class="co-aut">{{ cons.confession_author.username }}</p>
-          <span class="co-year">{{ cons.confession_author.get_profile_year_display }}</span>
-        </div>
-        <span class="co-title">{{ cons.confession_title|truncatechars:60 }}</span>
+        <a href="{% url 'home:confession_view' cons.confession_slug %}" class="co-title">{{ cons.confession_title|truncatechars:60 }}</a>
       </div>
-    </a>
+    </div>
 
     <div class="co-down-text">
       {{ cons.confession_body|linebreaks|truncatewords:60 }}
@@ -29,8 +31,14 @@
       </a>
     </div>
     <div class="co-upd-i">
-      <p class="co-upd-iu"><span class="co-emp ff-num">{{ cons.confession_upvotes }}</span> upvotes</p>
-      <p class="co-upd-iv"><span class="ff-num">{{ cons.confession_views}}</span> views</p>
+      <p class="co-upd-iu">
+        <span class="co-emp ff-num">{{ cons.confession_upvotes }}</span>
+        {% if cons.confession_upvotes is 1 %} upvote {% else %} upvotes {% endif %}
+      </p>
+      <p class="co-upd-iv">
+        <span class="ff-num">{{ cons.confession_views}}</span>
+        {% if cons.confession_views is 1 %} view {% else %} views {% endif %}
+      </p>
     </div>
   </div>
 

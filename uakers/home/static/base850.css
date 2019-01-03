@@ -1,0 +1,55 @@
+body {
+  padding: 0px;
+}
+
+.full-nav {
+  display: block;
+  height: auto;
+  max-height: none;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-logo-div {
+  display: block;
+  padding: 10px;
+}
+
+.nav-logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.mn-it {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.mn-underbar {
+  height: 100%;
+  width: 0px;
+}
+
+.mn-underbar-up {
+  height: 100%;
+  width: 2px;
+}
+
+.mn-it:hover .mn-undbar {
+  height: 100%;
+  width: 2px;
+}
