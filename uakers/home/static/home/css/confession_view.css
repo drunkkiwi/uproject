@@ -84,6 +84,10 @@
   color: var(--main-highlight-color);
 }
 
+.co-vote-i-active {
+  color: var(--main-highlight-color);
+}
+
 .co-rank-text {
   height: 100%;
   display: flex;

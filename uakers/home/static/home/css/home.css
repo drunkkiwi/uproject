@@ -133,13 +133,13 @@
   margin-right: 15px;
 }
 
-.co-upd i {
+.co-upd-i {
   color: var(--soothed-text-color);
   transition: all 0.2s ease-in-out;
 }
 
 
-.co-upd:hover i {
+.co-upd:hover .co-upd-i {
   color: var(--main-highlight-color);
 }
 
@@ -148,6 +148,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.co-upd-i-active {
+  color: var(--main-highlight-color);
 }
 
 .co-upd-iu {

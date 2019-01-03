@@ -3,6 +3,7 @@ from .models                import Confessions
 from .forms                 import SignUpForm, ConfessionsForm
 from django.contrib.auth    import login, authenticate, logout
 from django.core.paginator  import EmptyPage, PageNotAnInteger, Paginator
+from django.http            import HttpResponseRedirect
 
 
 # -------------- HOME VIEW / CONFESSION VIEW ----------------------------
@@ -71,11 +72,55 @@ def confession_view(request, confession_slug):
     return response
 
 
-# --------------------- Upvote confession -----------------------
-#def upvote_view(request, confession_slug):
+# ---------------- Upvote and downvote confession views -----------------------
+def upvote_view(request, confession_slug):
 
-#    upvote_confession = Confessions.objects.get(confession_slug=confession_slug)
+    upvote_confession = Confessions.objects.get(confession_slug=confession_slug)
+    upvote_confession_author = upvote_confession.confession_author
 
+    if request.user.is_authenticated:
+        if not request.user == upvote_confession_author:
+            if request.user in upvote_confession.confession_upvotes.all():
+                upvote_confession.confession_upvotes.remove(request.user)
+                upvote_confession.confession_upvotes_int -= 1
+                upvote_confession.save()
+            else:
+                upvote_confession.confession_upvotes.add(request.user)
+                if request.user in upvote_confession.confession_downvotes.all():
+                    upvote_confession.confession_downvotes.remove(request.user)
+                    upvote_confession.confession_upvotes_int += 1
+                upvote_confession.confession_upvotes_int += 1
+                upvote_confession.save()
+
+    else:
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def downvote_view(request, confession_slug):
+
+    downvote_confession = Confessions.objects.get(confession_slug=confession_slug)
+    downvote_confession_author = downvote_confession.confession_author
+
+    if request.user.is_authenticated:
+        if not request.user == downvote_confession_author:
+            if request.user in downvote_confession.confession_downvotes.all():
+                downvote_confession.confession_downvotes.remove(request.user)
+                downvote_confession.confession_upvotes_int += 1
+                downvote_confession.save()
+            else:
+                downvote_confession.confession_downvotes.add(request.user)
+                if request.user in downvote_confession.confession_upvotes.all():
+                    downvote_confession.confession_upvotes.remove(request.user)
+                    downvote_confession.confession_upvotes_int -= 1
+                downvote_confession.confession_upvotes_int -= 1
+                downvote_confession.save()
+
+    else:
+        return redirect(request.META['HTTP_REFERER'])
+
+    return redirect(request.META['HTTP_REFERER'])
 
 
 # ------------ AUTHENTICATION VIEWS ------------------------

@@ -42,18 +42,18 @@
 
       <div class="co-rank">
         <div class="co-vote">
-          <a href="#">
-            <i class="fas fa-arrow-up co-vote-i"></i>
+          <a href="{% url 'home:upvote_view' unique_confession.confession_slug %}">
+            <i class="fas fa-arrow-up co-vote-i {% if request.user in unique_confession.confession_upvotes.all %} co-vote-i-active {% endif %}"></i>
           </a>
-          <a href="#">
-            <i class="fas fa-arrow-down co-vote-i"></i>
+          <a href="{% url 'home:downvote_view' unique_confession.confession_slug %}">
+            <i class="fas fa-arrow-down co-vote-i {% if request.user in unique_confession.confession_downvotes.all %} co-vote-i-active {% endif %}"></i>
           </a>
         </div>
 
         <div class="co-rank-text">
           <p class="co-rank-text-s">
-            <span class="ff-emp">{{ unique_confession.confession_upvotes }}</span>
-            {% if unique_confession.confession_upvotes is 1 %} upvote {% else %} upvotes {% endif %}
+            <span class="ff-emp">{{ unique_confession.confession_upvotes_int }}</span>
+            {% if unique_confession.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}
           </p>
           <p class="co-rank-text-s">{{ unique_confession.confession_views }}
             {% if unique_confession.confession_views is 1 %} view {% else %} views {% endif %}

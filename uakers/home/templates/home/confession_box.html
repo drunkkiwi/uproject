@@ -23,20 +23,20 @@
 
   <div class="co-rank">
     <div class="co-upd-div">
-      <a class="co-upd" href="#">
-        <i class="fas fa-arrow-up"></i>
+      <a class="co-upd" href="{% url 'home:upvote_view' cons.confession_slug %}">
+        <i class="fas fa-arrow-up co-upd-i {% if request.user in cons.confession_upvotes.all %} co-upd-i-active {% endif %}"></i>
       </a>
-      <a class="co-upd" href="#">
-        <i class="fas fa-arrow-down"></i>
+      <a class="co-upd" href="{% url 'home:downvote_view' cons.confession_slug %}">
+        <i class="fas fa-arrow-down co-upd-i {% if request.user in cons.confession_downvotes.all %} co-upd-i-active {% endif %}"></i>
       </a>
     </div>
     <div class="co-upd-i">
       <p class="co-upd-iu">
-        <span class="co-emp ff-num">{{ cons.confession_upvotes }}</span>
-        {% if cons.confession_upvotes is 1 %} upvote {% else %} upvotes {% endif %}
+        <span class="co-emp ff-num">{{ cons.confession_upvotes_int }}</span>
+        {% if cons.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}
       </p>
       <p class="co-upd-iv">
-        <span class="ff-num">{{ cons.confession_views}}</span>
+        <span class="ff-num">{{ cons.confession_views }}</span>
         {% if cons.confession_views is 1 %} view {% else %} views {% endif %}
       </p>
     </div>
