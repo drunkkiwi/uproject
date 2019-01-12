@@ -1,0 +1,37 @@
+<div class="comment-main">
+
+  <div class="comment-up">
+    <div class="comment-photo-div">
+      <div class="comment-photo" style="background-image: url({{ comment.comment_author.profile_image }})"></div>
+    </div>
+    <div class="comment-up-text">
+      <p class="comment-up-username">
+        {{ comment.comment_author.username }}
+      </p>
+      <p class="comment-up-date">
+        {{ comment.comment_created_at|timesince }} ago
+      </p>
+    </div>
+  </div>
+  <div class="comment-down">
+    <div class="comment-body">
+      {{ comment.comment_body|linebreaks }}
+    </div>
+  </div>
+  <div class="co-cm-rank">
+    <div class="co-cm-functions">
+      <a class="co-cm-a co-upd co-upd-upvote co-anchor" href="{% url 'home:upvote_view' 'comment' comment.comment_slug %}">
+        <i class="fas fa-arrow-up co-upvote-downvote-gylph {% if request.user in comment.comment_upvotes.all %} co-upd-i-active {% endif %}"></i>
+      </a>
+      <a class="co-cm-a co-upd co-upd-downvote co-anchor" href="{% url 'home:downvote_view' 'comment' comment.comment_slug %}">
+        <i class="fas fa-arrow-down co-upvote-downvote-gylph {% if request.user in comment.comment_downvotes.all %} co-upd-i-active {% endif %}"></i>
+      </a>
+    </div>
+    <div class="co-cm-figures co-upd-info co-numbers">
+      <p class='co-cm-f co-upvote-par'>
+        <span class="ff-emp co-upvote-digit">{{ comment.comment_upvotes_int }}</span>
+        {% if comment.comment_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}
+      </p>
+    </div>
+  </div>
+</div>

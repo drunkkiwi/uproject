@@ -1,0 +1,18 @@
+<div class="comment-main">
+
+  <div class="comment-up">
+    <div class="comment-photo-div">
+      <div class="comment-photo" style="background-image: url({{ request.user.profile_image }})"></div>
+    </div>
+    <div class="comment-up-text">
+      <p class="comment-up-username">
+        {{ request.user.username }}
+      </p>
+    </div>
+  </div>
+  <div class="comment-down">
+    <div class="comment-body-post">
+      {{ co_form.comment_body }}
+    </div>
+  </div>
+</div>

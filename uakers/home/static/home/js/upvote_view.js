@@ -1,4 +1,4 @@
-let udbuttons = document.getElementsByClassName('co-upd');
+let udbuttons = document.getElementsByClassName('co-anchor');
 
 // ------------- get cookie function --------------
 function getCookie(name) {
@@ -51,13 +51,13 @@ for(let u = 0; u<udbuttons.length; u++){
 
       success: function(data){
         let ud_i_clicked = e.target;
-        let ud_upvotes = udbuttons[u].parentNode.parentNode.getElementsByClassName('co-upd-info')[0].getElementsByClassName('co-upd-iu')[0].getElementsByClassName('ff-num')[0];
+        let ud_upvotes = udbuttons[u].parentNode.parentNode.getElementsByClassName('co-numbers')[0].getElementsByClassName('co-upvote-par')[0].getElementsByClassName('co-upvote-digit')[0];
 
         let das = data.alert_state;
         let dau = data.alert_upvote_state;
         if(das == 'Upvoted'){
           ud_i_clicked.classList.add('co-upd-i-active');
-          let ud_i_sibling = ud_i_clicked.parentNode.parentNode.getElementsByClassName('co-upd-downvote')[0].getElementsByClassName('co-upd-i')[0];
+          let ud_i_sibling = ud_i_clicked.parentNode.parentNode.getElementsByClassName('co-upd-downvote')[0].getElementsByClassName('co-upvote-downvote-gylph')[0];
           if(ud_i_sibling.classList.contains('co-upd-i-active')){
             ud_i_sibling.classList.remove('co-upd-i-active');
           }
@@ -75,12 +75,30 @@ for(let u = 0; u<udbuttons.length; u++){
         }
         else if(das == 'Downvoted'){
           ud_i_clicked.classList.add('co-upd-i-active');
-          let ud_i_sibling = ud_i_clicked.parentNode.parentNode.getElementsByClassName('co-upd-upvote')[0].getElementsByClassName('co-upd-i')[0];
+          let ud_i_sibling = ud_i_clicked.parentNode.parentNode.getElementsByClassName('co-upd-upvote')[0].getElementsByClassName('co-upvote-downvote-gylph')[0];
           if(ud_i_sibling.classList.contains('co-upd-i-active')){
             ud_i_sibling.classList.remove('co-upd-i-active');
           }
 
           ud_upvotes.innerHTML = dau;
+        }
+        else if(das == 'NotLoggedIn'){
+          nlierr = document.getElementsByClassName('n-li-err')[0];
+          nlierr.classList.remove('dp-none');
+          if (nlierr.classList.contains('bounceOut')){
+            nlierr.classList.remove('bounceOut');
+          }
+          nlierr.classList.add('bounceIn');
+          setTimeout(function(){
+            nlierr.classList.remove('bounceIn');
+            nlierr.classList.add('bounceOut');
+          }, 3000)
+          setTimeout(function(){
+            nlierr.classList.add('dp-none');
+          }, 3500)
+        }
+        else {
+          console.log(das);
         }
       }
     });

@@ -1,3 +1,7 @@
+.co-unique {
+  border-color: var(--darkest-background-color);
+}
+
 .co-up {
   position: relative;
 }
@@ -23,4 +27,37 @@
   box-sizing: border-box;
   padding: 0px;
   padding: 15px;
+}
+
+.co-rank {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.co-upd {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+}
+
+.co-upd-i, .co-upd-iu {
+  margin: 0px;
+}
+
+.co-upd-iu {
+  margin: 0 10px;
+}
+
+.co-vote, .co-upd-info, .co-comment-announcer {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+  border-top: 1px solid var(--main-background-color);
+}
+
+.co-rank {
+  padding: 0px;
 }

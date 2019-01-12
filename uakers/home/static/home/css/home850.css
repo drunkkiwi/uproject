@@ -6,8 +6,7 @@
   width: 90%;
   margin: 0px;
   border-width: 2px;
-  border-color: var(--lighter-background-color);
-  margin-bottom: 5px;
+  margin-bottom: 15px !important;
 }
 
 .non-show-post-wrapper {

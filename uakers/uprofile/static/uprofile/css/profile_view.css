@@ -1,0 +1,51 @@
+body {
+  background-color: var(--main-background-color);
+}
+
+.left-user {
+  position: fixed;
+  width: 300px;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: var(--darker-background-color);
+  box-sizing: border-box;
+}
+
+.right-user {
+  display: block;
+  padding-left: 300px;
+  background-color: var(--main-background-color);
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.left-photo-div {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+
+.left-meta-info {
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--main-background-color);
+}
+
+.lmiflex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-meta-info-p, .left-meta-info-s {
+  color: var(--soothed-text-color);
+  font-size: 16px;
+}
+
+.lmi-f {
+  color: #FF71A5;
+}
+
+.lmi-m {
+  color: #B1A2FF;
+}

@@ -11,52 +11,22 @@
 
 {% block body %}
 
+  {% if not request.user.is_authenticated %}
+  {% include 'home/upvote_error.html' %}
+  {% endif %}
+
   <div class="rest-div">
-    <div class="co-unique">
 
-      <div class="co-up">
-        <div class="co-photo-div">
-          <div class="co-photo" style="background-image: url({{ unique_confession.confession_author.profile_image }})"></div>
-        </div>
-        <div class="co-meta-text">
-          <div class="co-meta-usr-date">
-            <span class="co-meta-usr">
-              {{ unique_confession.confession_author.username }}
-            </span>
-            <span class="co-meta-date ff-num">
-              {{ unique_confession.confession_created_at|timesince }} ago
-            </span>
-          </div>
+    <div class="rest-co">
+      {% include 'home/confession_view_confession_box.html' %}
 
-          <div class="co-meta-title-div">
-            <p class="co-meta-title">{{ unique_confession.confession_title }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="co-down">
-        {{ unique_confession.confession_body|linebreaks }}
-      </div>
-
-      <div class="co-rank">
-        <div class="co-vote">
-          <a class="co-upd co-upd-upvote" href="{% url 'home:upvote_view' unique_confession.confession_slug %}">
-            <i class="fas fa-arrow-up co-upd-i co-i-upvote {% if request.user in unique_confession.confession_upvotes.all %} co-upd-i-active {% endif %}"></i>
-          </a>
-          <a class="co-upd co-upd-downvote" href="{% url 'home:downvote_view' unique_confession.confession_slug %}">
-            <i class="fas fa-arrow-down co-upd-i co-i-downvote {% if request.user in unique_confession.confession_downvotes.all %} co-upd-i-active {% endif %}"></i>
-          </a>
-        </div>
-
-        <div class="co-upd-info">
-          <p class="co-upd-iu">
-            <span class="ff-emp ff-num">{{ unique_confession.confession_upvotes_int }}</span>
-            {% if unique_confession.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}
-          </p>
-          <p class="co-upd-iu">{{ unique_confession.confession_views }}
-            {% if unique_confession.confession_views is 1 %} view {% else %} views {% endif %}
-          </p>
-        </div>
+      <div class="co-comments">
+        {% if request.user.is_authenticated %}
+        {% include 'home/confession_view_comment_post.html' %}
+        {% endif %}
+        {% for comment in all_confession_comments %}
+        {% include 'home/confession_view_confession_comment.html' %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -65,4 +35,5 @@
 
 {% block js %}
   <script type="text/javascript" src="{% static 'home/js/upvote_view.js'%}"></script>
+  <script type="text/javascript" src="{% static 'home/js/confession_view.js'%}"></script>
 {% endblock %}

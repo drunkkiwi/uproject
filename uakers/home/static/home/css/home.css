@@ -1,3 +1,20 @@
+body {
+  background-image: url('https://i.pinimg.com/originals/45/9d/db/459ddbb53bb2c675d46ac75d83bce93f.gif');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-overlayer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-background-color);
+  opacity: 0.97;
+  z-index: -1;
+}
+
 .full-underlier {
   box-sizing: border-box;
   display: flex;
@@ -21,6 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
 }
 
 .area-announcer {
@@ -32,7 +50,7 @@
   align-items: center;
   background-color: var(--darker-background-color);
   border: 1px solid var(--lighter-background-color);
-  border-bottom: 0.1px solid var(--opaque-highlight-color);
+  border-bottom: 0.1px solid var(--main-highlight-color);
 }
 
 .area-an-text {
@@ -48,7 +66,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .co-main {
@@ -63,7 +81,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 2px solid var(--main-background-color);
+  /*border-bottom: 2px solid var(--main-background-color);*/
   padding: 15px 20px 15px 15px;
 }
 
@@ -76,7 +94,10 @@
   height: 60px;
   width: 60px;
   background-size: cover;
-  border-radius: 1px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .co-up-text {
@@ -174,6 +195,14 @@
   color: var(--main-highlight-color);
 }
 
+.co-upd-comments {
+  margin-right: 20px;
+}
+
+.co-co-color {
+  color: var(--main-highlight-color);
+}
+
 /* ----------- Confession post form ------------------ */
 
 .non-show-container {
@@ -181,6 +210,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .non-show-post-wrapper {
@@ -189,7 +219,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
 }
 
 .ns-text {
@@ -203,6 +232,7 @@
   border: 1px solid var(--lighter-background-color);
   margin: 10px 0px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .post-conf {
@@ -226,11 +256,11 @@
   width: 495px;
   box-sizing: border-box;
   background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid var(--lighter-background-color);
 }
 
 .co-main-post {
@@ -246,11 +276,11 @@
   width: 100%;
   max-width: 100%;
   min-width: 100%;
-  background-color: var(--upto-darker-background-color);
+  background-color: var(--main-background-color);
   color: var(--soothed-text-color);
   padding: 4px 12px 4px 8px;
-  border: 1px solid var(--lighter-background-color);
-  border-radius: 2px;
+  border: 2px solid var(--lighter-background-color);
+  border-radius: 4px;
 }
 
 #id_confession_body {
@@ -263,14 +293,14 @@
   min-height: 120px;
   height: 120px;
 
-  background-color: var(--upto-darker-background-color);
+  background-color: var(--main-background-color);
   color: var(--soothed-text-color);
   outline: none;
   border: none;
   box-sizing: border-box;
   padding: 6px 16px 16px 10px;
   border: 2px solid var(--lighter-background-color);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .co-up-text-post {
@@ -296,7 +326,7 @@
 }
 
 #id_confession_body:focus, #id_confession_title:focus {
-  border: 1px solid var(--opaque-highlight-color);
+  border: 2px solid var(--main-highlight-color);
 }
 
 .co-post-btn {
@@ -314,7 +344,7 @@
   background-color: var(--main-background-color);
   padding: 6px 11px;
   color: var(--soothed-text-color);
-  border: 1px solid var(--lighter-background-color);
+  border: 1px solid var(--darkest-background-color);
   border-radius: 2px;
   margin-right: 5px;
 }
@@ -328,7 +358,7 @@
 }
 
 .co-post-btn:hover {
-  border-color: var(--opaque-highlight-color);
+  border-color: var(--main-highlight-color);
 }
 
 .co-bd-post {
@@ -388,15 +418,30 @@
 
 
 .co-a-y-f {
-  background-color: var(--main-background-color);
   width: 50%;
-  height: 20px;
+  padding-left: 0px;
+  margin-left: 15px;
 }
 
-.co-t-f {
+.co-aut-f {
   background-color: var(--main-background-color);
+  width: 100%;
+  height: 18px;
+}
+
+.co-time-f {
+  background-color: var(--main-background-color);
+  width: 60%;
+  margin-top: 10px;
+  height: 18px;
+}
+
+.co-up-text-f {
+  padding: 10px 0;
   width: 80%;
-  height: 20px;
+  background-color: var(--main-background-color);
+  margin-top: 15px;
+  margin-left: 5px;
 }
 
 .co-b-f {
@@ -429,4 +474,31 @@
   background-color: var(--main-background-color);
   color: var(--main-background-color);
   cursor: context-menu;
+}
+
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+.like-not-loggedin {
+  overflow: hidden;
+  position: fixed;
+  top: 50px;
+  height: auto;
+  min-width: 100%;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+}
+
+.like-not-loggedin-p {
+  box-sizing: border-box;
+  padding: 5px 12px;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-highlight-color);
+}
+
+.dp-none {
+  display: none;
 }

@@ -1,0 +1,52 @@
+<div class="co-unique">
+
+  <div class="co-up">
+    <div class="co-photo-div">
+      <div class="co-photo" style="background-image: url({{ unique_confession.confession_author.profile_image }})"></div>
+    </div>
+    <div class="co-meta-text">
+      <div class="co-meta-usr-date">
+        <span class="co-meta-usr">
+          {{ unique_confession.confession_author.username }}
+        </span>
+        <span class="co-meta-date ff-num">
+          {{ unique_confession.confession_created_at|timesince }} ago
+        </span>
+      </div>
+
+      <div class="co-meta-title-div">
+        <p class="co-meta-title">{{ unique_confession.confession_title }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="co-down">
+    {{ unique_confession.confession_body|linebreaks }}
+  </div>
+
+  <div class="co-rank">
+    <div class="co-vote">
+      <a class="co-upd co-upd-upvote co-anchor" href="{% url 'home:upvote_view' 'confession' unique_confession.confession_slug %}">
+        <i class="fas fa-arrow-up co-upd-i co-i-upvote co-upvote-downvote-gylph {% if request.user in unique_confession.confession_upvotes.all %} co-upd-i-active {% endif %}"></i>
+      </a>
+      <a class="co-upd co-upd-downvote co-anchor" href="{% url 'home:downvote_view' 'confession' unique_confession.confession_slug %}">
+        <i class="fas fa-arrow-down co-upd-i co-i-downvote co-upvote-downvote-gylph {% if request.user in unique_confession.confession_downvotes.all %} co-upd-i-active {% endif %}"></i>
+      </a>
+    </div>
+
+    <div class="co-upd-info co-numbers">
+      <p class="co-upd-iu co-upvote-par">
+        <span class="ff-emp ff-num co-upvote-digit">{{ unique_confession.confession_upvotes_int }}</span>
+        <i class="fas fa-rocket co-cai" data-title="upvotes"></i>
+      </p>
+      <div class="co-comment-announcer">
+        <span class="co-cat-nr">{{ unique_confession.confessioncomment_set.count }}</span>
+        <i class="fas fa-cookie-bite co-cai" data-title="comments"></i>
+      </div>
+      <p class="co-upd-iu">{{ unique_confession.confession_views }}
+        <i class="fas fa-binoculars" data-title="views"></i>
+      </p>
+    </div>
+
+  </div>
+</div>

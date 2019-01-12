@@ -3,22 +3,24 @@
   {% csrf_token %}
 
   <!-- -------- Auth field container ------------- -->
+  <div class="auth-container">
   {% for field in form %}
-  <div class="auth-cont">
-    <!-- ------ Within the auth-container, the label part --------- -->
-    <div class="auth-label">
-      {{ field.label_tag }}
+    <div class="auth-cont">
+      <!-- ------ Within the auth-container, the label part --------- -->
+      <div class="auth-label">
+        {{ field.label_tag }}
+      </div>
+      <!-- ----- Within the auth-container, the input part ---------- -->
+      <div class="auth-inp">
+        {{ field }}
+      </div>
     </div>
-    <!-- ----- Within the auth-container, the input part ---------- -->
-    <div class="auth-inp">
-      {{ field }}
-    </div>
-  </div>
   <!-- ------------- end of the auth field container -->
   {% endfor %}
-
   <!-- ----------- Authentication submit button --------------- -->
   <div class="auth-cont-btn">
     <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% else %}Log in{% endif %}</button>
   </div>
+  </div>
+
 </form>

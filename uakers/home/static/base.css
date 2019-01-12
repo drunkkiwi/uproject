@@ -11,31 +11,36 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: var(--main-highlight-color);
+  color: var(--main-background-color);
+}
 
 :root {
 
   /* ------------- Colors ---------------- */
 
   --main-highlight-color: #ff0058;
+  --darker-highlight-color: #D9004B;
   --opaque-highlight-color: rgba(255, 0, 88, 0.6);
   --secondary-highlight-color: #ff4021;
 
   /*------ Main background colors ------*/
-  --main-background-color: #070707;
-  --opaque-background-color: rgba(0, 0, 0, 0.6);
+  --main-background-color: #0B0C0D;
+  --opaque-background-color: rgba(11, 12, 13, 0.8);
 
     /*---------- Darker shades ------------*/
-  --darker-background-color: #000000;
-  --upto-darker-background-color: #050505;
+  --darker-background-color: #060708;
 
   /*  ----------- Lighter shades ---------- */
-  --lighter-background-color: #0C0E11;
+  --lighter-background-color: #111314;
 
   /* ------------ text color ------------- */
   --main-text-color: #fefefe;
   --soothed-text-color: #DFE8EB;
   --opaque-text-color: rgba(255, 255, 255, 0.6);
 }
+
 
 body {
   background-color: var(--main-background-color);
@@ -88,8 +93,8 @@ textarea {
 }
 
 .nav-logo {
-  height: 35px;
-  max-height: 35px;
+  height: 30px;
+  max-height: 30px;
 }
 
 .nav-menu {
@@ -141,7 +146,7 @@ textarea {
 
 .mn-underbar-up {
   width: 100%;
-  background-image: linear-gradient(-90deg, var(--secondary-highlight-color), var(--main-highlight-color));
+  background-color: var(--main-highlight-color);
 }
 
 
@@ -165,4 +170,34 @@ textarea {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--lighter-background-color);
+}
+
+
+
+/* ----------------- TOOLTIP ------------------------*/
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    color: var(--soothed-text-color);
+    padding: 5px 12px;
+    background-color: var(--darker-background-color);
+    border: 1px solid var(--lighter-background-color);
+    position: absolute;
+    bottom: 20px;
+    right: -15px;
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+[data-title] {
+    position: relative;
 }

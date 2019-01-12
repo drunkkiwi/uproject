@@ -1,6 +1,6 @@
 from django.shortcuts       import render, redirect
-from .models                import Confessions
-from .forms                 import SignUpForm, ConfessionsForm
+from .models                import Confessions, ConfessionComment
+from .forms                 import SignUpForm, ConfessionsForm, ConfessionCommentForm
 from django.contrib.auth    import login, authenticate, logout
 from django.core.paginator  import EmptyPage, PageNotAnInteger, Paginator
 from django.http            import JsonResponse
@@ -8,7 +8,7 @@ from django.http            import JsonResponse
 
 # -------------- HOME VIEW / CONFESSION VIEW ----------------------------
 def home_view(request):
-    all_conf = Confessions.objects.all().order_by('-id')
+    all_conf = Confessions.objects.all().order_by('-id')[:100]
 
     co_form = ConfessionsForm()
 
@@ -52,6 +52,21 @@ def confession_view(request, confession_slug):
     cookieset = 'viewed_confession' + confession_slug
 
     unique_confession = Confessions.objects.get(confession_slug=confession_slug)
+    all_confession_comments = ConfessionComment.objects.filter(comment_confession=unique_confession).order_by('-comment_upvotes_int')[:50]
+
+    if request.method == 'GET':
+        co_form = ConfessionCommentForm()
+    elif request.method == 'POST':
+        co_form = ConfessionCommentForm(request.POST)
+        if co_form.is_valid():
+            temp = co_form.save(commit=False)
+            temp.comment_author = request.user
+            temp.comment_confession = unique_confession
+            temp.save()
+            return redirect('home:confession_view')
+
+        return redirect('home:confession_view')
+
 
     if cookieset in request.COOKIES:
         if request.COOKIES[cookieset] == 'yes':
@@ -65,6 +80,8 @@ def confession_view(request, confession_slug):
 
     context = {
         'unique_confession': unique_confession,
+        'all_confession_comments': all_confession_comments,
+        'co_form': co_form,
     }
 
     response = render(request, 'home/confession_view.html', context)
@@ -73,71 +90,116 @@ def confession_view(request, confession_slug):
 
 
 # ---------------- Upvote and downvote confession views -----------------------
-def upvote_view(request, confession_slug):
+def upvote_view(request, co_type, co_slug):
 
-    upvote_confession = Confessions.objects.get(confession_slug=confession_slug)
-    upvote_confession_author = upvote_confession.confession_author
+    alert_upvote_int = False
     alert_message = False
+    upvote_co = False
 
     if request.user.is_authenticated:
-        if not request.user == upvote_confession_author:
-            if request.user in upvote_confession.confession_upvotes.all():
-                upvote_confession.confession_upvotes.remove(request.user)
-                upvote_confession.confession_upvotes_int -= 1
-                upvote_confession.save()
+
+        if co_type == 'confession':
+            upvote_co = Confessions.objects.get(confession_slug=co_slug)
+            if request.user in upvote_co.confession_upvotes.all():
+                upvote_co.confession_upvotes.remove(request.user)
+                upvote_co.confession_upvotes_int -= 1
+                upvote_co.save()
                 alert_message = "Unupvoted"
             else:
-                upvote_confession.confession_upvotes.add(request.user)
-                if request.user in upvote_confession.confession_downvotes.all():
-                    upvote_confession.confession_downvotes.remove(request.user)
-                    upvote_confession.confession_upvotes_int += 1
-                upvote_confession.confession_upvotes_int += 1
-                upvote_confession.save()
+                upvote_co.confession_upvotes.add(request.user)
+                if request.user in upvote_co.confession_downvotes.all():
+                    upvote_co.confession_downvotes.remove(request.user)
+                    upvote_co.confession_upvotes_int += 1
+                upvote_co.confession_upvotes_int += 1
+                upvote_co.save()
                 alert_message = "Upvoted"
 
-        else:
-            alert_message = "Selfupvote"
+            alert_upvote_int = upvote_co.confession_upvotes_int
 
-    else:
-        alert_message = "NotLogedIn"
+        elif co_type == 'comment':
+            upvote_co = ConfessionComment.objects.get(comment_slug=co_slug)
 
-    alert_upvote_int = upvote_confession.confession_upvotes_int
-
-    data = {
-        'alert_state': alert_message,
-        'alert_upvote_state': alert_upvote_int
-    }
-    return JsonResponse(data)
-
-
-def downvote_view(request, confession_slug):
-
-    downvote_confession = Confessions.objects.get(confession_slug=confession_slug)
-    downvote_confession_author = downvote_confession.confession_author
-    alert_message = False
-
-    if request.user.is_authenticated:
-        if not request.user == downvote_confession_author:
-            if request.user in downvote_confession.confession_downvotes.all():
-                downvote_confession.confession_downvotes.remove(request.user)
-                downvote_confession.confession_upvotes_int += 1
-                downvote_confession.save()
-                alert_message = "Undownvoted"
+            if request.user in upvote_co.comment_upvotes.all():
+                upvote_co.comment_upvotes.remove(request.user)
+                upvote_co.comment_upvotes_int -= 1
+                upvote_co.save()
+                alert_message = "Unupvoted"
             else:
-                downvote_confession.confession_downvotes.add(request.user)
-                if request.user in downvote_confession.confession_upvotes.all():
-                    downvote_confession.confession_upvotes.remove(request.user)
-                    downvote_confession.confession_upvotes_int -= 1
-                downvote_confession.confession_upvotes_int -= 1
-                downvote_confession.save()
-                alert_message = "Downvoted"
-        else:
-            alert_message = "Selfupvote"
+                upvote_co.comment_upvotes.add(request.user)
+                if request.user in upvote_co.comment_downvotes.all():
+                    upvote_co.comment_downvotes.remove(request.user)
+                    upvote_co.comment_upvotes_int += 1
+                upvote_co.comment_upvotes_int += 1
+                upvote_co.save()
+                alert_message = "Upvoted"
+
+            alert_upvote_int = upvote_co.comment_upvotes_int
+
 
     else:
         alert_message = "NotLoggedIn"
 
-    alert_upvote_int = downvote_confession.confession_upvotes_int
+
+    data = {
+        'alert_state': alert_message,
+        'alert_upvote_state': alert_upvote_int,
+    }
+    return JsonResponse(data)
+
+
+def downvote_view(request, co_type, co_slug):
+
+    alert_message = False
+    downvote_co = False
+
+    if request.user.is_authenticated:
+
+        if co_type == 'confession':
+
+            downvote_co = Confessions.objects.get(confession_slug=co_slug)
+
+            if request.user in downvote_co.confession_downvotes.all():
+                downvote_co.confession_downvotes.remove(request.user)
+                downvote_co.confession_upvotes_int += 1
+                downvote_co.save()
+                alert_message = "Undownvoted"
+            else:
+                downvote_co.confession_downvotes.add(request.user)
+                if request.user in downvote_co.confession_upvotes.all():
+                    downvote_co.confession_upvotes.remove(request.user)
+                    downvote_co.confession_upvotes_int -= 1
+                downvote_co.confession_upvotes_int -= 1
+                downvote_co.save()
+                alert_message = "Downvoted"
+
+            alert_upvote_int = downvote_co.confession_upvotes_int
+
+        elif co_type == 'comment':
+
+            downvote_co = ConfessionComment.objects.get(comment_slug=co_slug)
+
+            if request.user in downvote_co.comment_downvotes.all():
+                downvote_co.comment_downvotes.remove(request.user)
+                downvote_co.comment_upvotes_int += 1
+                downvote_co.save()
+                alert_message = "Undownvoted"
+            else:
+                downvote_co.comment_downvotes.add(request.user)
+                if request.user in downvote_co.comment_upvotes.all():
+                    downvote_co.comment_upvotes.remove(request.user)
+                    downvote_co.comment_upvotes_int -= 1
+                downvote_co.comment_upvotes_int -= 1
+                downvote_co.save()
+                alert_message = "Downvoted"
+
+                alert_upvote_int = downvote_co.comment_upvotes_int
+
+        else:
+            return false
+
+    else:
+        alert_message = "NotLoggedIn"
+
 
     data = {
         'alert_state': alert_message,

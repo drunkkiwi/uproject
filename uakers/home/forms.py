@@ -1,7 +1,7 @@
 from django                         import forms
 from django.contrib.auth.forms      import UserCreationForm
 from django.contrib.auth.models     import User
-from .models                        import UserProfile, Confessions
+from .models                        import UserProfile, Confessions, ConfessionComment
 from .choices                       import *
 
 
@@ -21,3 +21,11 @@ class ConfessionsForm(forms.ModelForm):
     class Meta:
         model = Confessions
         fields = ('confession_title', 'confession_body')
+
+
+class ConfessionCommentForm(forms.ModelForm):
+    comment_body = forms.CharField(max_length=10000, required=True, widget=forms.Textarea(attrs={'placeholder': 'what do you think of the confession?', 'onfocus': 'this.placeholder=""', 'onblur': 'this.placeholder="what do you think of the confession?"'}))
+
+    class Meta:
+        model = ConfessionComment
+        fields = ('comment_body',)

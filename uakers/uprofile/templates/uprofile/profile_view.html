@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ user_profile.username }}{% endblock %}
+
+{% block upro-underbar-up %}mn-underbar-up{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'uprofile/css/profile_view.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <div class="left-user">
+
+    <div class="left-photo-div" style="background-image: url({{ user_profile.profile_image }})">
+    </div>
+
+    <div class="left-meta-info">
+      <p class="left-meta-info-p">@{{ user_profile.username }}</p>
+    </div>
+    <div class="left-meta-info">
+      <p class="left-meta-info-p {% if user_profile.profile_sex is 'F'%} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.get_profile_sex_display }}</p>
+    </div>
+    <div class="left-meta-info">
+      <p class="left-meta-info-p">{{ user_profile.get_profile_year_display }}</p>
+    </div>
+    <div class="left-meta-info lmiflex">
+      <p class="left-meta-info-p">Confessions</p>
+      <span class="left-meta-info-s">{{ user_confession_number }}</span>
+    </div>
+
+  </div>
+
+  <div class="right-user">
+
+  </div>
+
+{% endblock %}

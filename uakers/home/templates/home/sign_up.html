@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Uakers signup{% endblock %}
+{% block title %}Signup{% endblock %}
 {% block liv_su_underbar %}mn-underbar-up{% endblock %}
 
 {% block css %}
@@ -10,9 +10,11 @@
 {% block body %}
   <!-- ------- Rest of the page, 100vh -------------- -->
   <div class="rest-auth">
-    {% include 'home/auth_box.html' %}
-    <p class="o-auth">
-      Already have an account? Log in <a class="o-auth-emp" href="{% url 'home:log_in_view' %}">here</a>
-    </p>
+    <div class="auth-options">
+      {% include 'home/auth_box.html' %}
+      <p class="o-auth">
+        Already have an account? Log in <a class="o-auth-emp" href="{% url 'home:log_in_view' %}">here</a>
+      </p>
+    </div>
   </div>
 {% endblock %}

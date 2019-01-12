@@ -3,7 +3,7 @@
   <div class="co-main">
     <div class="co-up">
       <div class="co_photo_meta_div">
-        <div class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></div>
+        <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></a>
         <div class="co-aut-year">
           <p class="co-aut">{{ cons.confession_author.username }}</p>
           <span class="co-year ff-num">{{ cons.confession_created_at|timesince }} ago</span>
@@ -23,21 +23,34 @@
 
   <div class="co-rank">
     <div class="co-upd-div">
-      <a class="co-upd co-upd-upvote" href="{% url 'home:upvote_view' cons.confession_slug %}">
-        <i class="fas fa-arrow-up co-upd-i co-i-upvote {% if request.user in cons.confession_upvotes.all %} co-upd-i-active {% endif %}"></i>
+      <a class="co-upd co-upd-upvote co-anchor" href="{% url 'home:upvote_view' 'confession' cons.confession_slug %}">
+        <i class="fas fa-arrow-up co-upd-i co-i-upvote co-upvote-downvote-gylph {% if request.user in cons.confession_upvotes.all %} co-upd-i-active {% endif %}"></i>
       </a>
-      <a class="co-upd co-upd-downvote" href="{% url 'home:downvote_view' cons.confession_slug %}">
-        <i class="fas fa-arrow-down co-upd-i co-i-downvote {% if request.user in cons.confession_downvotes.all %} co-upd-i-active {% endif %}"></i>
+      <a class="co-upd co-upd-downvote co-anchor" href="{% url 'home:downvote_view' 'confession' cons.confession_slug %}">
+        <i class="fas fa-arrow-down co-upd-i co-i-downvote co-upvote-downvote-gylph {% if request.user in cons.confession_downvotes.all %} co-upd-i-active {% endif %}"></i>
       </a>
     </div>
-    <div class="co-upd-info">
-      <p class="co-upd-iu">
-        <span class="co-emp ff-num">{{ cons.confession_upvotes_int }}</span>
-        {% if cons.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}
+    <div class="co-upd-info co-numbers">
+      <p class="co-upd-iu co-upvote-par">
+        <span class="co-emp ff-num co-upvote-digit">{{ cons.confession_upvotes_int }}</span>
+        <!--{% if cons.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}-->
+        <i class="fas fa-rocket co-co-color" data-title="upvotes"></i>
       </p>
+      <div class="co-upd-comments">
+        <span class="co-co-color">
+          {{ cons.confessioncomment_set.count }}
+        </span>
+        <i class="fas fa-cookie-bite co-co-color" data-title="comments"></i>
+        <!--{% if cons.confessioncomment_set.count is 1 %}
+        comment
+        {% else %}
+        comments
+        {% endif %}-->
+      </div>
       <p class="co-upd-iv">
         <span class="ff-num">{{ cons.confession_views }}</span>
-        {% if cons.confession_views is 1 %} view {% else %} views {% endif %}
+        <i class="fas fa-binoculars" data-title="views"></i>
+        <!--{% if cons.confession_views is 1 %} view {% else %} views {% endif %}-->
       </p>
     </div>
   </div>
