@@ -1,9 +1,9 @@
 <div class="comment-main">
 
   <div class="comment-up">
-    <div class="comment-photo-div">
+    <a href="{% url 'uprofile:profile_view' comment.comment_author.profile_slug %}" class="comment-photo-div">
       <div class="comment-photo" style="background-image: url({{ comment.comment_author.profile_image }})"></div>
-    </div>
+    </a>
     <div class="comment-up-text">
       <p class="comment-up-username">
         {{ comment.comment_author.username }}

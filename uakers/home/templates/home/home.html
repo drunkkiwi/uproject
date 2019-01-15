@@ -15,9 +15,6 @@
 
 {% block body %}
 
-  <div class="bg-overlayer">
-  </div>
-
   {% if not request.user.is_authenticated %}
   {% include 'home/upvote_error.html' %}
   {% endif %}
@@ -37,12 +34,17 @@
   <!-- -------------- The div that wraps the rest of the page ------------------- -->
   <div class="full-underlier">
 
+    <div class="bg-overlayer">
+    </div>
+
     <!-- --------------------- Area announcment----------------------------- -->
+    {% if all_conf %}
     <div class="area-announcer-wrapper">
       <div class="area-announcer">
         <span class="area-an-text">All confessions</span>
       </div>
     </div>
+    {% endif %}
     <!-- ---------------- The full grid of all the confessions -------------- -->
     <div class="full-grid-l">
 

@@ -18,9 +18,14 @@
   <!-- ------------- end of the auth field container -->
   {% endfor %}
   <!-- ----------- Authentication submit button --------------- -->
-  <div class="auth-cont-btn">
-    <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% else %}Log in{% endif %}</button>
-  </div>
+    <div class="auth-cont-btn">
+      <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% else %}Log in{% endif %}</button>
+    </div>
+    {% if form.errors %}
+    <div class="auth-l-error rotateIn">
+      {{ form.errors }}
+    </div>
+    {% endif %}
   </div>
 
 </form>

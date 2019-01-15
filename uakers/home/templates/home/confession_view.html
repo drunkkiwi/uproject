@@ -11,6 +11,9 @@
 
 {% block body %}
 
+  <div class="bg-overlayer">
+  </div>
+
   {% if not request.user.is_authenticated %}
   {% include 'home/upvote_error.html' %}
   {% endif %}

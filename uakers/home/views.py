@@ -149,6 +149,7 @@ def upvote_view(request, co_type, co_slug):
 
 def downvote_view(request, co_type, co_slug):
 
+    alert_upvote_int = False
     alert_message = False
     downvote_co = False
 

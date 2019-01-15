@@ -5,13 +5,23 @@ from django.dispatch                    import receiver
 from django.db                          import models
 from .choices                           import *
 
+# -------------------------- CUSTOM USER PROFILE ------------------------------
 class UserProfile(AbstractUser):
     profile_year            = models.CharField(max_length=2, choices=YCHOICES)
     profile_sex             = models.CharField(max_length=1, choices=SCHOICES)
     profile_image           = models.CharField(max_length=700, blank=True)
     profile_slug            = models.SlugField(blank=True, max_length=900)
+    profile_song            = models.CharField(max_length=300, blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        if self.profile_song:
+            if self.profile_song[:5] == 'https':
+                self.profile_song = 'https://www.youtube.com/embed/' + str(self.profile_song[32:])
+            elif self.profile_song[:5] == 'http:':
+                self.profile_song = 'https://www.youtube.com/embed/' + str(self.profile_song[31:])
+            elif self.profile_song[:3] == 'www':
+                self.profile_song = 'https://www.youtube.com/embed/' + str(self.profile_song[24:])
+
         cusername = self.username
 
         if not self.id:
@@ -26,15 +36,17 @@ class UserProfile(AbstractUser):
         return self.username + ', ' + self.profile_year + ', ' + self.profile_sex
 
 
+
+#--------------------------- CONFESSIONS -----------------------------
 class Confessions(models.Model):
-    confession_author       = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    confession_author       = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     confession_title        = models.CharField(max_length=100)
     confession_body         = models.TextField(blank=False, null=False)
     confession_upvotes      = models.ManyToManyField(UserProfile, related_name='confession_upvotes', blank=True)
     confession_downvotes    = models.ManyToManyField(UserProfile, related_name='confession_downvotes', blank=True)
     confession_upvotes_int  = models.IntegerField(default=0)
     confession_views        = models.IntegerField(default=0)
-    confession_created_at   = models.DateTimeField(auto_now_add=True)
+    date_created_at         = models.DateTimeField(auto_now_add=True)
     confession_updated_at   = models.DateTimeField(auto_now=True)
     confession_slug         = models.SlugField(blank=True, max_length=900)
 
@@ -54,9 +66,11 @@ class Confessions(models.Model):
         return str(self.confession_author.username) + ', ' + str(self.confession_title) + ', ' + str(self.confession_upvotes_int)
 
 
+
+# ---------------------- CONFESSION COMMENTS ----------------------------
 class ConfessionComment(models.Model):
-    comment_confession      = models.ForeignKey('Confessions', on_delete=models.CASCADE)
-    comment_author          = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    comment_confession      = models.ForeignKey(Confessions, on_delete=models.CASCADE)
+    comment_author          = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     comment_body            = models.TextField(blank=False, null=False)
     comment_created_at      = models.DateTimeField(auto_now_add=True)
     comment_upvotes_int     = models.IntegerField(default=0)

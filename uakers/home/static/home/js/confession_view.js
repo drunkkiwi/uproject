@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function(){
       } else {
         let scrh = textareas[txa].scrollHeight + 4
         textareas[txa].style.height = scrh + 'px';
-        console.log(textareas[txa].scrollHeight)
       }
     });
   }

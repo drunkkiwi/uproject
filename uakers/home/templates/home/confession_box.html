@@ -5,9 +5,9 @@
       <div class="co_photo_meta_div">
         <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></a>
         <div class="co-aut-year">
-          <p class="co-aut">{{ cons.confession_author.username }}</p>
-          <span class="co-year ff-num">{{ cons.confession_created_at|timesince }} ago</span>
-          <span class="co-year ff-num">#{{ cons.id }}</span>
+          <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co-aut">@{{ cons.confession_author.username }}</a>
+          <span class="co-year">{{ cons.date_created_at|timesince }} ago</span>
+          <span class="co-year">#{{ cons.id }}</span>
         </div>
       </div>
 
@@ -32,8 +32,7 @@
     </div>
     <div class="co-upd-info co-numbers">
       <p class="co-upd-iu co-upvote-par">
-        <span class="co-emp ff-num co-upvote-digit">{{ cons.confession_upvotes_int }}</span>
-        <!--{% if cons.confession_upvotes_int is 1 %} upvote {% else %} upvotes {% endif %}-->
+        <span data-title="{% for uuser in cons.confession_upvotes.all %}{{ uuser.username }}, {% endfor %}" class="co-emp co-upvote-digit">{{ cons.confession_upvotes_int }}</span>
         <i class="fas fa-rocket co-co-color" data-title="upvotes"></i>
       </p>
       <div class="co-upd-comments">
@@ -41,16 +40,10 @@
           {{ cons.confessioncomment_set.count }}
         </span>
         <i class="fas fa-cookie-bite co-co-color" data-title="comments"></i>
-        <!--{% if cons.confessioncomment_set.count is 1 %}
-        comment
-        {% else %}
-        comments
-        {% endif %}-->
       </div>
       <p class="co-upd-iv">
-        <span class="ff-num">{{ cons.confession_views }}</span>
+        <span>{{ cons.confession_views }}</span>
         <i class="fas fa-binoculars" data-title="views"></i>
-        <!--{% if cons.confession_views is 1 %} view {% else %} views {% endif %}-->
       </p>
     </div>
   </div>

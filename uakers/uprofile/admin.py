@@ -1,3 +1,7 @@
-from django.contrib import admin
+from django.contrib                 import admin
+from uprofile.models                import FollowProfile, QuestionPost, AnswerPost
 
-# Register your models here.
+
+admin.site.register(QuestionPost)
+admin.site.register(AnswerPost)
+admin.site.register(FollowProfile)

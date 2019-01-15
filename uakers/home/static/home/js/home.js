@@ -2,9 +2,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
   let ns_text = document.getElementsByClassName('ns-text')[0];
 
-  //let rin = 'zoomInUp';
-  //let rout = 'zoomOutUp';
-
   let rin = 'fadeInDown';
   let rout = 'fadeOutUp';
 

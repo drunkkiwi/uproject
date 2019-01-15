@@ -55,7 +55,7 @@
         </a>
 
         {% if user.is_authenticated %}
-        <a href="{% url 'uprofile:profile_view' request.user.profile_slug %}" class="mn-it">
+        <a href="{% url 'uprofile:profile_view' %}" class="mn-it">
 
           <i class="fas fa-user-astronaut mn-i"></i>
           <span class="mn-tx">profile</span>

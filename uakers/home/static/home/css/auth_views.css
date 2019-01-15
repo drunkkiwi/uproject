@@ -108,3 +108,14 @@ input:-webkit-autofill:focus {
   color: var(--main-highlight-color);
   font-weight: 700;
 }
+
+
+/* -------------------- IF ERROR -----------------------*/
+.auth-l-error {
+  padding: 5px 0;
+  color: var(--soothed-text-color);
+}
+
+.auth-l-error ul li {
+  font-size: 14px;
+}

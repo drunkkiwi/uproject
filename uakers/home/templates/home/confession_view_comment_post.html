@@ -12,7 +12,11 @@
   </div>
   <div class="comment-down">
     <div class="comment-body-post">
-      {{ co_form.comment_body }}
+      <form class="comment-form" action="" method="post">
+        {% csrf_token %}
+        {{ co_form.comment_body }}
+        <button class="comment-sub-btn" type="submit">Comment</button>
+      </form>
     </div>
   </div>
 </div>

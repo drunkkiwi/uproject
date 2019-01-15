@@ -27,10 +27,11 @@
 
   /*------ Main background colors ------*/
   --main-background-color: #0B0C0D;
-  --opaque-background-color: rgba(11, 12, 13, 0.8);
+  --opaque-main-background-color: rgba(11, 12, 13, 0.8);
 
     /*---------- Darker shades ------------*/
   --darker-background-color: #060708;
+  --upto-darker-background-color: #09090A;
 
   /*  ----------- Lighter shades ---------- */
   --lighter-background-color: #111314;
@@ -38,7 +39,7 @@
   /* ------------ text color ------------- */
   --main-text-color: #fefefe;
   --soothed-text-color: #DFE8EB;
-  --opaque-text-color: rgba(255, 255, 255, 0.6);
+  --opaque-text-color: rgba(255, 255, 255, 0.7);
 }
 
 
@@ -171,8 +172,6 @@ textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--lighter-background-color);
 }
-
-
 
 /* ----------------- TOOLTIP ------------------------*/
 

@@ -1,0 +1,42 @@
+<div class="quans_container">
+
+  <div class="quans_box">
+
+    <div class="quans_meta_content">
+      <div class="quans_photo_div">
+        <a href="{% url 'uprofile:profile_view' cons.question_author.profile_slug %}" class="quans_photo" style="background-image: url({{ cons.question_author.profile_image }})"></a>
+      </div>
+
+      <div class="quans_meta_text">
+        <p class="quans_meta_username">@{{ cons.question_author.username }}</p>
+        <p class="quans_meta_date">{{ cons.date_created_at }}</p>
+      </div>
+    </div>
+
+    <div class="quans_body">
+      {{ cons.question_body|linebreaks }}
+    </div>
+
+  </div>
+
+  {% for answer in cons.answerpost_set.all %}
+  <div class="quans_box qb_ans">
+
+    <div class="quans_meta_content">
+      <div class="quans_photo_div">
+        <a href="{% url 'uprofile:profile_view' answer.answer_author.profile_slug %}" class="quans_photo" style="background-image: url({{ answer.answer_author.profile_image }})"></a>
+      </div>
+
+      <div class="quans_meta_text qmt2">
+        <p class="quans_meta_username">@{{ answer.answer_author.username }}</p>
+        <p class="quans_meta_date">{{ answer.answer_created_at }}</p>
+      </div>
+    </div>
+
+    <div class="quans_body">
+      {{ answer.answer_body|linebreaks }}
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
