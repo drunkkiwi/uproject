@@ -6,37 +6,57 @@
 {% block upro-underbar-up %}{% if isuser %}mn-underbar-up{% endif %}{% endblock %}
 
 {% block css %}
+  <link rel="stylesheet" href="{% static 'common_views.css' %}">
   <link rel="stylesheet" href="{% static 'uprofile/css/profile_view.css' %}">
 {% endblock %}
 
 {% block body %}
 
+  {% if not request.user.is_authenticated %}
+  {% include 'home/upvote_error.html' %}
+  {% endif %}
+
   <div class="main-container">
     <div class="bg-overlayer">
     </div>
-    <div class="left-user">
+    <div class="left-user-div">
+      <div class="left-user">
 
-      <div class="left-photo-div" style="background-image: url({{ user_profile.profile_image }})">
-      </div>
+        <div class="left-photo-div" style="background-image: url({{ user_profile.profile_image }})">
+        </div>
 
-      <div class="left-meta-info">
-        <p class="left-meta-info-p">@{{ user_profile.username }}</p>
-      </div>
-      <div class="left-meta-info">
-        <p class="left-meta-info-p {% if user_profile.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.get_profile_sex_display }}</p>
-      </div>
-      <div class="left-meta-info">
-        <p class="left-meta-info-p">{{ user_profile.get_profile_year_display }}</p>
-      </div>
-      <div class="left-meta-info lmiflex">
-        <p class="left-meta-info-p">Confessions</p>
-        <span class="left-meta-info-s">{{ user_confession_number }}</span>
-      </div>
-      <div class="left-meta-info lmiflex">
-        <p class="left-meta-info-p">Questions</p>
-        <span class="left-meta-info-s">{{ user_questions.count }}</span>
-      </div>
+        <div class="left-meta-info">
+          <p class="left-meta-info-p {% if user_profile.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.username }}</p>
+        </div>
+        <div class="left-meta-info">
+          <p class="left-meta-info-p {% if user_profile.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.get_profile_sex_display }}</p>
+        </div>
+        <div class="left-meta-info">
+          <p class="left-meta-info-p">{{ user_profile.get_profile_year_display }}</p>
+        </div>
+        <div class="left-meta-info lmiflex left-meta-co">
+          <p class="left-meta-info-p">Confessions</p>
+          <span class="left-meta-info-s">{{ user_confession_number }}</span>
+        </div>
+        <div class="left-meta-info lmiflex left-meta-qu">
+          <p class="left-meta-info-p">Question & Answers</p>
+          <span class="left-meta-info-s">{{ user_questions.count }}</span>
+        </div>
+        <div class="left-meta-info lmiflex">
+          <p class="left-meta-info-p">Followed</p>
+          <span class="left-meta-info-s">{{ fo_nr }}</span>
+        </div>
+        <div class="left-meta-info lmiflex">
+          <p class="left-meta-info-p">Following</p>
+          <span class="left-meta-info-s">{{ following_nr }}</span>
+        </div>
+        {% if not isuser and not have_followed_them %}
+        <div class="left-meta-info lmi-div">
+          <a href="{% url 'uprofile:follow_profile_view' request.user.profile_slug user_profile.profile_slug %}" class="left-meta-btn">Follow</a>
+        </div>
+        {% endif %}
 
+      </div>
     </div>
 
     <div class="right-user">
@@ -55,7 +75,7 @@
       </div>
 
       {% if user_profile.profile_song %}
-      <iframe width="700" height="394" src="{{ user_profile.profile_song }}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="0" height="0" src="{{ user_profile.profile_song }}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       {% endif %}
 
     </div>

@@ -12,6 +12,7 @@ urlpatterns = [
     path('co_post', views.confession_post_view, name='confession_post_view'),
     # ----------------unique confession page --------------
     path('confession/<str:confession_slug>', views.confession_view, name='confession_view'),
+    path('delete/confession/<str:confession_slug>', views.ConfessionDeleteView.as_view(), name='confession_delete_view'),
 
 
     # ------------------ confession upvote / downvote ---------------------

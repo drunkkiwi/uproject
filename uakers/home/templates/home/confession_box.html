@@ -1,14 +1,19 @@
-<div class="confession_box">
+<div class="confession_box confession_profile">
 
   <div class="co-main">
     <div class="co-up">
       <div class="co_photo_meta_div">
         <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></a>
         <div class="co-aut-year">
-          <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co-aut">@{{ cons.confession_author.username }}</a>
+          <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co-aut {% if cons.confession_author.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ cons.confession_author.username }}</a>
           <span class="co-year">{{ cons.date_created_at|timesince }} ago</span>
           <span class="co-year">#{{ cons.id }}</span>
         </div>
+        {% if cons.confession_author.profile_slug == request.user.profile_slug %}
+        <div class="co-up-del-div">
+          <i class="fas fa-times co-up-delete"></i>
+        </div>
+        {% endif %}
       </div>
 
       <div class="co-up-text">
@@ -48,5 +53,19 @@
     </div>
   </div>
 
+  {% if request.user.is_authenticated %}
+  {% if cons.confession_author.profile_slug == request.user.profile_slug %}
+  <form class="co-deletion co-deletion-hidden" action="{% url 'home:confession_delete_view' cons.confession_slug %}" method="post">
+    {% csrf_token %}
+    <div class="co-deletion-warning">
+      <p>Are you sure you want to delete this confession? This proccess is unrevokable</p>
+    </div>
+    <div class="co-deletion-opters">
+    <button type="submit" class="co-deletion-opt co-del-warn">Yes, delete</button>
+    <span class="co-deletion-opt co-del-no">No, do not delete</span>
+    </div>
+  </form>
+  {% endif %}
+  {% endif %}
 
 </div>

@@ -40,6 +40,17 @@
   --main-text-color: #fefefe;
   --soothed-text-color: #DFE8EB;
   --opaque-text-color: rgba(255, 255, 255, 0.7);
+
+
+
+  /* -------------- External -------------------- */
+  --female-main-color: #FF71A5;
+  --male-main-color: #B1A2FF;
+
+  --question-main-color: #004A99;
+  --answer-main-color: #08A6A4;
+
+  --warning-main-color: #990016;
 }
 
 
@@ -199,4 +210,12 @@ textarea {
 
 [data-title] {
     position: relative;
+}
+
+.lmi-f {
+  color: var(--female-main-color);
+}
+
+.lmi-m {
+  color: var(--male-main-color);
 }

@@ -5,15 +5,31 @@ body {
   background-position: center;
 }
 
+.left-user-div {
+  height: auot;
+  position: relative;
+}
+
+.left-meta-co {
+  border-left: 2px solid var(--question-main-color);
+}
+
+.left-meta-qu {
+  border-left: 2px solid var(--answer-main-color);
+}
 
 .left-user {
   position: fixed;
   width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
   background-color: var(--darker-background-color);
   box-sizing: border-box;
+  overflow-x: hidden;
+  z-index: 900;
 }
 
 .left-photo-div {
@@ -24,7 +40,7 @@ body {
 
 .left-meta-info {
   box-sizing: border-box;
-  padding: 10px 15px;
+  padding: 7px 15px;
   border-bottom: 1px solid var(--main-background-color);
 }
 
@@ -38,12 +54,26 @@ body {
   font-size: 16px;
 }
 
-.lmi-f {
-  color: #FF71A5;
+.left-meta-btn {
+  border: none;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+  padding: 5px 12px;
+  color: var(--soothed-text-color);
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.lmi-m {
-  color: #B1A2FF;
+.left-meta-btn:hover {
+  background-color: var(--darker-highlight-color);
+  color: var(--darker-background-color);
+  font-weight: 700;
+}
+
+.lmi-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ---------------------- RIGHT SIDE ----------------------------- */
@@ -63,23 +93,6 @@ body {
   padding: 50px;
 }
 
-/*.right-announcer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.r-ann-s {
-  color: var(--soothed-text-color);
-  background-color: var(--darker-background-color);
-  padding: 5px 12px;
-  border: 1px solid var(--lighter-background-color);
-  border-bottom: 1px solid var(--main-highlight-color);
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}*/
 
 /* ----------------------- QUESTION / ANSWER BOX ----------------------*/
 /* ----------------------- QUESTION / ANSWER BOX ----------------------*/
@@ -88,24 +101,33 @@ body {
 .quans_container {
   margin-bottom: 30px;
   width: 600px;
+  position: relative;
 }
 
 .quans_box {
   background-color: var(--darker-background-color);
-  border-radius: 6px;
   display: flex;
-  border: 1px solid var(--lighter-background-color);
+  border: 1px solid var(--main-background-color);
+  padding: 10px;
+}
+
+.qb_que {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.qb_ans {
+  border-top: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .quans_meta_content {
   display: flex;
-  padding: 10px 0 10px 10px;
-  flex: 3;
 }
 
 .quans_photo_div {
   box-sizing: border-box;
-  padding-right: 10px;
 }
 
 .quans_photo {
@@ -115,41 +137,49 @@ body {
   background-size: cover;
   background-position: center;
   border-radius: 25px;
+  border: 2px solid var(--answer-main-color);
 }
 
 .quans_photo:hover {
   border-radius: 6px;
+  border-color: var(--darker-background-color);
 }
 
 .quans_meta_text {
-  border-right: 1px solid var(--lighter-background-color);
-  padding-right: 10px;
   display: flex;
   flex-direction: column;
 }
 
-.quans_meta_username {
-  color: var(--soothed-text-color);
-  font-weight: 700;
-}
 
-.quans_meta_date {
-  color: var(--opaque-text-color);
-}
-
-.quans_body {
+.quans_body_all {
   display: flex;
-  padding: 10px;
-  color: var(--soothed-text-color);
+  flex-direction: column;
   flex: 7;
 }
 
-.quans_body p {
-  font-size: 18px;
+.quans_body {
+  flex: 1;
+  color: var(--soothed-text-color);
+  padding-left: 10px;
 }
 
-.qb_ans {
-  border-top: none;
+.quans_body p {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.quans_body p.quans_meta_date {
+  color: var(--opaque-text-color);
+  width: auto;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.quans_body p.quans_meta_username {
+  font-weight: 700;
+  display: inline-block;
+  width: auto;
 }
 
 iframe {
@@ -160,164 +190,45 @@ iframe {
 
 
 /* ------------------ CONFESSION BOX -------------------------- */
-.confession_box {
-  width: 495px;
-  box-sizing: border-box;
-  background-color: var(--darker-background-color);
-  border: 1px solid var(--lighter-background-color);
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 6px;
-}
-
-.co-main {
-  height: 100%;
-}
 
 .confession_box:nth-child(odd) {
-  margin-right: 10px;
+  margin-right: 0;
 }
 
-.co-up {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 15px 20px 5px 15px;
-}
-
-.co_photo_meta_div {
-  display: flex;
-  flex-direction: row;
-}
-
-.co_photo {
-  height: 60px;
-  width: 60px;
-  background-size: cover;
-  background-position: center;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.co_photo:hover {
-  border-radius: 30px;
-}
-
-.co-up-text {
-  box-sizing: border-box;
-  color: var(--soothed-text-color);
-  padding: 15px 0 0 5px;
-}
-
-.co-aut-year {
-  display: flex;
-  flex-direction: column;
-  color: var(--soothed-text-color);
-  padding-left: 15px;
-}
-
-.co-aut {
-  color: var(--soothed-text-color);
-  font-size: 16px;
-}
-
-.co-aut:hover {
-  color: var(--main-text-color);
-}
-
-.co-at-ico {
-  font-size: 14px;
-  color: var(--opaque-text-color);
-}
-
-.co-year {
-  font-size: 14px;
-  color: var(--opaque-text-color);
-  font-weight: 300;
-}
-
-.co-title {
-  font-size: 20px;
-  color: var(--soothed-text-color);
-}
-
-.co-down-text {
-  padding: 5px 20px 10px 20px;
-  color: var(--soothed-text-color);
-}
-
-.co-body {
-  color: var(--soothed-text-color);
-  font-size: 16px;
-}
-
-.co-rank {
-  border-top: 2px solid var(--main-background-color);
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-}
-
-.co-upd-div {
-  margin-left: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.co-upd {
-  margin-right: 15px;
-}
-
-.co-upd-i {
-  color: var(--soothed-text-color);
-  transition: all 0.2s ease-in-out;
-}
-
-
-.co-upd:hover .co-upd-i {
-  color: var(--main-highlight-color);
-}
-
-.co-upd-i {
-  color: var(--soothed-text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.co-upd-i-active {
-  color: var(--main-highlight-color);
-}
-
-.co-upd-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--soothed-text-color);
-}
-
-.co-upd-iu {
-  margin-right: 20px;
-  font-size: 16px;
-}
-
-.co-upd-iv {
-  font-size: 16px;
-}
-
-.co-emp {
-  color: var(--main-highlight-color);
-}
-
-.co-upd-comments {
-  margin-right: 20px;
+.confession_profile {
+  margin: 0;
+  margin-bottom: 30px;
+  width: 600px;
 }
 
 .co-co-color {
   color: var(--main-highlight-color);
+}
+
+.co_photo {
+  border: 2px solid var(--question-main-color);
+}
+
+.co_photo:hover {
+  border-color: var(--darker-background-color);
+}
+
+/* ------------------------- LMI ---------------------------- */
+.lmi-f {
+  color: var(--female-main-color);
+}
+
+.lmi-m {
+  color: var(--male-main-color);
+}
+
+
+/* ----------------------- delete x --------------------- */
+.co-up-del-div-pf {
+  top: 5px;
+  right: 10px;
+}
+
+.co-deletion-warning {
+  margin-bottom: 5px;
 }

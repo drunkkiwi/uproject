@@ -14,8 +14,10 @@ body {
 }
 
 .auth-options {
-  background-color: var(--lighter-background-color);
+  background-color: var(--main-background-color);
   padding: 50px;
+  border-radius: 6px;
+  border: 1px solid var(--lighter-background-color);
 }
 
 .rest-auth {
@@ -41,11 +43,11 @@ body {
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 5px;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 
 .auth-label label {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .auth-inp {
@@ -56,10 +58,10 @@ body {
 input, select {
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--main-background-color);
-  font-size: 18px;
+  background-color: var(--darker-background-color);
+  font-size: 16px;
   color: var(--soothed-text-color);
-  border: 1px solid var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
   border-radius: 6px;
   padding: 6px 12px 6px 12px;
 }
@@ -69,7 +71,7 @@ input:focus, select:focus {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px var(--main-background-color) inset;
+  -webkit-box-shadow: 0 0 0 1000px var(--darker-background-color) inset;
   -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -85,16 +87,18 @@ input:-webkit-autofill:focus {
 .auth-btn {
   width: 100%;
   border: none;
-  background-color: var(--main-highlight-color);
-  color: var(--darker-background-color);
+  background-color: var(--main-background-color);
+  border: 1px solid var(--lighter-background-color);
+  color: var(--soothed-text-color);
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 6px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .auth-btn:hover {
   background-color: var(--darker-highlight-color);
+  color: var(--darker-background-color);
 }
 
 .o-auth {

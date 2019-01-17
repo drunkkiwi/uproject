@@ -1,3 +1,4 @@
+// ------------------ co-anchor <a> links -------------------- //
 let udbuttons = document.getElementsByClassName('co-anchor');
 
 // ------------- get cookie function --------------
@@ -104,4 +105,35 @@ for(let u = 0; u<udbuttons.length; u++){
     });
 
   })
+}
+
+
+
+// ----------------------- confirm deletion view ----------------------
+let delete_x = document.getElementsByClassName('co-up-delete');
+
+for (let delx=0; delx<delete_x.length; delx++){
+  delete_x[delx].addEventListener('click', function(){
+
+    co_deletion_div = delete_x[delx].parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('co-deletion')[0];
+    console.log(delete_x[delx]);
+    console.log(co_deletion_div);
+    console.log(delete_x[delx].parentNode.parentNode.parentNode.parentNode.parentNode);
+
+    if(co_deletion_div.classList.contains('co-deletion-hidden')){
+      co_deletion_div.classList.remove('co-deletion-hidden');
+    } else {
+      co_deletion_div.classList.add('co-deletion-hidden');
+    }
+
+  });
+}
+
+
+let delete_no = document.getElementsByClassName('co-del-no');
+
+for(let delno=0; delno<delete_no.length; delno++){
+  delete_no[delno].addEventListener('click', function(){
+    delete_no[delno].parentNode.parentNode.classList.add('co-deletion-hidden')
+  });
 }

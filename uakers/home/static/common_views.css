@@ -1,0 +1,260 @@
+/* -------------------- CONFESSION BOX ---------------------- */
+/* -------------------- CONFESSION BOX ---------------------- */
+/* -------------------- CONFESSION BOX ---------------------- */
+
+.confession_box {
+  width: 495px;
+  box-sizing: border-box;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 6px;
+  position: relative;
+}
+
+
+.co-main {
+  height: 100%;
+}
+
+.confession_box:nth-child(odd) {
+  margin-right: 10px;
+}
+
+.co-up {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px 5px 15px;
+}
+
+.co_photo_meta_div {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.co-up-del-div {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: var(--soothed-text-color);
+}
+
+.co-up-delete {
+  color: var(--soothed-text-color);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.co-up-delete:hover {
+  color: var(--main-text-color);
+}
+
+.co_photo {
+  height: 60px;
+  width: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+}
+
+.co_photo:hover {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.co-up-text {
+  box-sizing: border-box;
+  color: var(--soothed-text-color);
+  padding: 15px 0 0 5px;
+}
+
+.co-aut-year {
+  display: flex;
+  flex-direction: column;
+  color: var(--soothed-text-color);
+  padding-left: 15px;
+}
+
+.co-aut {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.co-aut:hover {
+  color: var(--main-text-color);
+}
+
+.co-at-ico {
+  font-size: 14px;
+  color: var(--opaque-text-color);
+}
+
+.co-year {
+  font-size: 14px;
+  color: var(--opaque-text-color);
+  font-weight: 300;
+}
+
+.co-title {
+  font-size: 20px;
+  color: var(--soothed-text-color);
+}
+
+.co-down-text {
+  padding: 5px 20px 10px 20px;
+  color: var(--soothed-text-color);
+}
+
+.co-body {
+  color: var(--soothed-text-color);
+  font-size: 16px;
+}
+
+.co-rank {
+  border-top: 2px solid var(--main-background-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.co-upd-div {
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.co-upd {
+  margin-right: 15px;
+}
+
+.co-upd-i {
+  color: var(--soothed-text-color);
+  transition: all 0.2s ease-in-out;
+}
+
+
+.co-upd:hover .co-upd-i {
+  color: var(--main-highlight-color);
+}
+
+.co-upd-i {
+  color: var(--soothed-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.co-upd-i-active {
+  color: var(--main-highlight-color);
+}
+
+.co-upd-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--soothed-text-color);
+}
+
+.co-upd-iu {
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+.co-upd-iv {
+  font-size: 16px;
+}
+
+.co-emp {
+  color: var(--main-highlight-color);
+}
+
+.co-upd-comments {
+  margin-right: 20px;
+}
+
+.co-co-color {
+  color: var(--main-highlight-color);
+}
+
+
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+/* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+.like-not-loggedin {
+  overflow: hidden;
+  position: fixed;
+  top: 50px;
+  height: auto;
+  min-width: 100%;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+  z-index: 9999;
+}
+
+.like-not-loggedin-p {
+  box-sizing: border-box;
+  padding: 5px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-highlight-color);
+}
+
+.dp-none {
+  display: none;
+}
+
+
+/* ------------------- CO DELETION -------------------------- */
+
+.co-deletion {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--darker-background-color);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.co-deletion-hidden {
+  display: none;
+}
+
+.co-deletion-warning {
+  color: var(--soothed-text-color);
+  max-width: 300px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.co-deletion-opt {
+  padding: 4px 12px;
+  background-color: var(--main-background-color);
+  border: 1px solid var(--lighter-background-color);
+  border-radius: 5px;
+  color: var(--soothed-text-color);
+  cursor: pointer;
+}
+
+.co-del-warn {
+  background-color: var(--warning-main-color);
+  color: var(--darker-background-color);
+  font-weight: 700;
+  border: none;
+  outline: none;
+  border: 1px solid var(--lighter-background-color);
+}

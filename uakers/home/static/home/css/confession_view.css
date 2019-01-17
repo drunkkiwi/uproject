@@ -303,11 +303,12 @@ body {
 /* ----------------- NOT LOGGED IN AND LIKED ------------------ */
 /* ----------------- NOT LOGGED IN AND LIKED ------------------ */
 /* ----------------- NOT LOGGED IN AND LIKED ------------------ */
+/* This is here and not used common_views.css because it's just this bit
+---- and there is no need to clog up with unneccesary code from common_views.css */
 .like-not-loggedin {
   overflow: hidden;
   position: fixed;
   top: 50px;
-  left: 0px;
   height: auto;
   min-width: 100%;
   background-color: var(--darker-background-color);

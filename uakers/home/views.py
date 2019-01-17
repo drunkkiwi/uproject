@@ -1,9 +1,12 @@
-from django.shortcuts       import render, redirect
-from .models                import Confessions, ConfessionComment
-from .forms                 import SignUpForm, ConfessionsForm, ConfessionCommentForm
-from django.contrib.auth    import login, authenticate, logout
-from django.core.paginator  import EmptyPage, PageNotAnInteger, Paginator
-from django.http            import JsonResponse
+from django.shortcuts           import render, redirect, get_object_or_404
+from .models                    import Confessions, ConfessionComment
+from .forms                     import SignUpForm, ConfessionsForm, ConfessionCommentForm
+from django.contrib.auth        import login, authenticate, logout
+from django.core.paginator      import EmptyPage, PageNotAnInteger, Paginator
+from django.http                import JsonResponse
+from django.urls                import reverse_lazy
+from django.views.generic.edit  import DeleteView
+
 
 
 # -------------- HOME VIEW / CONFESSION VIEW ----------------------------
@@ -46,6 +49,16 @@ def confession_post_view(request):
         return redirect('home:home_view')
 
     return redirect('home:home_view')
+
+# --------------- Confession delete view -----------------
+class ConfessionDeleteView(DeleteView):
+    model = Confessions
+    success_url = reverse_lazy('home:home_view')
+
+    def get_object(self):
+        object = get_object_or_404(Confessions, confession_slug=self.kwargs['confession_slug'])
+        return object
+
 
 # ---------------- CONFESSION UNIQUE VIEW ------------------
 def confession_view(request, confession_slug):
