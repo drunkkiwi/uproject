@@ -68,6 +68,11 @@ body {
   font-size: 15px;
 }
 
+.co-meta-username {
+  font-weight: 700;
+  color: var(--opaque-text-color);
+}
+
 .co-meta-title-div {
   padding-top: 10px;
 }
@@ -82,7 +87,12 @@ body {
   padding: 10px 30px 10px 25px;
   color: var(--soothed-text-color);
   font-size: 17px;
+  overflow: hidden;
   word-break: break-all;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 
@@ -202,17 +212,26 @@ body {
   flex: 1;
   box-sizing: border-box;
   padding-left: 10px;
+  position: relative;
 }
 
-.comment-up-username {
+.comment-up-nickname {
   color: var(--soothed-text-color);
   font-size: 17px;
   font-weight: 700;
 }
 
+.comment-up-username {
+  font-size: 15px;
+  color: var(--opaque-text-color);
+}
+
 .comment-up-date {
   color: var(--soothed-text-color);
   font-size: 14px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 
 .comment-body {
@@ -322,4 +341,15 @@ body {
 
 .dp-none {
   display: none;
+}
+
+
+/* ------------------------- MALE OR FEMALE COLOR ----------------------------- */
+
+.lmi-m {
+  color: var(--male-main-color);
+}
+
+.lmi-f {
+  color: var(--female-main-color);
 }

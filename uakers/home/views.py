@@ -67,6 +67,8 @@ def confession_view(request, confession_slug):
     unique_confession = Confessions.objects.get(confession_slug=confession_slug)
     all_confession_comments = ConfessionComment.objects.filter(comment_confession=unique_confession).order_by('-comment_upvotes_int')[:50]
 
+    redirect_next_page = request.POST.get('next_page', '/')
+
     if request.method == 'GET':
         co_form = ConfessionCommentForm()
     elif request.method == 'POST':
@@ -76,7 +78,7 @@ def confession_view(request, confession_slug):
             temp.comment_author = request.user
             temp.comment_confession = unique_confession
             temp.save()
-            return redirect('home:confession_view')
+            return redirect(redirect_next_page)
 
         return redirect('home:confession_view')
 

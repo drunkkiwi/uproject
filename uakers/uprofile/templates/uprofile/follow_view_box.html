@@ -5,20 +5,21 @@
   <div class="follow_upper">
     <div class="follow_photo_usr">
       <a href="{% url 'uprofile:profile_view' follow_user.profile_slug %}" class="follow_photo" style="background-image:url({{ follow_user.profile_image }})"></a>
-      <p class="follow_usr {{follow_user|m_or_f_color}}">{{ follow_user.username }}</p>
+      <p class="follow_usr {{follow_user|m_or_f_color}}">{{ follow_user.profile_nickname }}</p>
+      <p class="follow_usr_username">@{{follow_user.username}}</p>
     </div>
   </div>
   <div class="follow_down">
-    <div class="follow_down_hold">
-      <p class="follow_down_text"><span class="{{follow_user|m_or_f_color}}">{{ follow_user.get_profile_sex_display }},</span> {{ follow_user.get_profile_year_display }},</p>
-    </div>
-    <div class="follow_down_hold follow_down_hflex">
-      <span class="follow_down_text">Followed</span>
-      <span class="follow_down_text">{{ follow_user|rec_followed_by }}</span>
-    </div>
-    <div class="follow_down_hold follow_down_hflex">
-      <span class="follow_down_text">Following</span>
-      <span class="follow_down_text">{{ follow_user|rec_following }}</span>
-    </div>
+    <span class="follow_down_hold {{follow_user|m_or_f_color}}">
+      {{ follow_user.get_profile_sex_display }}
+    </span>
+    <span class="follow_down_hold">
+      Followed:
+      {{ follow_user|rec_followed_by }}
+    </span>
+    <span class="follow_down_hold">
+      Following:
+      {{ follow_user|rec_following }}
+    </span>
   </div>
 </div>

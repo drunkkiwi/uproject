@@ -1,8 +1,22 @@
 body {
   background-color: var(--main-background-color);
-  background-image: url('https://i.pinimg.com/originals/53/a8/08/53a808759b1edf0ae0b73c711475faf8.gif');
+  /*background-image: url('https://i.pinimg.com/originals/53/a8/08/53a808759b1edf0ae0b73c711475faf8.gif');*/
+  background-image: url('https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
   background-size: cover;
   background-position: center;
+}
+
+.bg-overlayer {
+  background-color: var(--main-background-color);
+  opacity: 0.9;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 /* ---------------------- LEFT SIDE ----------------------------- */
@@ -52,8 +66,16 @@ body {
 }
 
 .left-meta-uy {
-  color: var(--soothed-text-color);
   font-size: 18px;
+  font-weight: 800;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.left-meta-uys {
+  color: var(--opaque-text-color);
+  font-size: 13px;
+  text-align: center;
 }
 
 .left-meta-info-wrap {
@@ -91,15 +113,15 @@ body {
 }
 
 .left-meta-btn:hover {
-  background-color: var(--darker-highlight-color);
-  color: var(--darker-background-color);
-  font-weight: 700;
+  border: 1px solid var(--main-highlight-color);
 }
 
 .left-meta-btn-followed {
-  background-color: var(--main-highlight-color);
-  color: var(--darker-background-color);
-  font-weight: bold;
+  border: 1px solid var(--main-highlight-color);
+}
+
+.left-meta-btn-followed:hover {
+  border: 1px solid var(--lighter-background-color);
 }
 
 .lmi-div {
@@ -148,7 +170,6 @@ body {
 .qb_que {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  border-bottom: 1px solid var(--qa-main-color);
 }
 
 .qb_ans {
@@ -181,6 +202,7 @@ body {
 .quans_meta_text {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 
@@ -201,18 +223,17 @@ body {
   box-sizing: border-box;
 }
 
-.quans_body p.quans_meta_date {
-  color: var(--opaque-text-color);
-  width: auto;
-  font-size: 14px;
-  font-weight: 300;
-  margin-bottom: 10px;
-}
-
-.quans_body p.quans_meta_username {
+.quans_body p.quans_meta_nickname {
   font-weight: 700;
   display: inline-block;
   width: auto;
+}
+
+.quans_body p.quans_meta_username {
+  display: inline-block;
+  width: auto;
+  color: var(--opaque-text-color);
+  margin-bottom: 10px;
 }
 
 iframe {
@@ -236,10 +257,6 @@ iframe {
 
 .co-co-color {
   color: var(--main-highlight-color);
-}
-
-.co-rank {
-  border-top: 1px solid var(--confession-main-color);
 }
 
 /* ------------------------- LMI ---------------------------- */
@@ -269,4 +286,56 @@ iframe {
   background-color: var(--main-background-color);
   color: var(--soothed-text-color);
   border-radius: 5px;
+}
+
+
+/* ---------------------------- Question Form ------------------------------- */
+
+#id_question_body {
+  background: none;
+  outline: none;
+  border: none;
+  background-color: var(--main-background-color);
+  border-radius: 4px;
+  border: 1px solid var(--lighter-background-color);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  width: 95%;
+  height: 50px;
+  color: var(--soothed-text-color);
+}
+
+#id_question_body:focus {
+  border-color: var(--main-highlight-color);
+}
+
+#id_answer_body {
+  background: none;
+  outline: none;
+  border: none;
+  background-color: var(--main-background-color);
+  border-radius: 4px;
+  border: 1px solid var(--lighter-background-color);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  width: 95%;
+  height: 50px;
+  color: var(--soothed-text-color);
+}
+
+#id_answer_body:focus {
+  border-color: var(--main-highlight-color);
+}
+
+.quans_post_btn {
+  padding: 5px 12px;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+  color: var(--soothed-text-color);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quans_post_btn:hover, .quans_post_btn:focus {
+  border-color: var(--main-highlight-color);
 }

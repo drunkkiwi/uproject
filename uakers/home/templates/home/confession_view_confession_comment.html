@@ -1,3 +1,4 @@
+{% load main_external_filters %}
 <div class="comment-main">
 
   <div class="comment-up">
@@ -5,8 +6,11 @@
       <div class="comment-photo" style="background-image: url({{ comment.comment_author.profile_image }})"></div>
     </a>
     <div class="comment-up-text">
+      <p class="comment-up-nickname {{ comment.comment_author|m_or_f_color }}">
+        {{ comment.comment_author.profile_nickname }}
+      </p>
       <p class="comment-up-username">
-        {{ comment.comment_author.username }}
+        @{{ comment.comment_author.username }}
       </p>
       <p class="comment-up-date">
         {{ comment.comment_created_at|timesince }} ago

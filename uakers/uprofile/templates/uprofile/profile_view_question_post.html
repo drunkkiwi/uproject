@@ -1,0 +1,31 @@
+{% load main_external_filters %}
+<div class="quans_container">
+  <div class="quans_box qb_que">
+
+    <div class="quans_meta_content">
+      <div class="quans_photo_div">
+        <a href="{% url 'uprofile:profile_view' request.user.profile_slug %}" class="quans_photo" style="background-image: url({{ request.user.profile_image }})"></a>
+      </div>
+
+    </div>
+
+    <div class="quans_body">
+
+      <div class="quans_meta_text">
+        <p class="quans_meta_nickname {{request.user|m_or_f_color}}">
+          {{ request.user.profile_nickname }}
+        </p>
+        <p class="quans_meta_username">
+          @{{ request.user.username }}
+        </p>
+      </div>
+      <form action="{% url 'uprofile:question_post_view' user_profile.profile_slug %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="next_page" value="{{ request.path }}">
+        {{ qu_form.question_body }}
+        <button type="submit" name="button" class="quans_post_btn">Ask</button>
+      </form>
+    </div>
+
+  </div>
+</div>

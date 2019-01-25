@@ -106,7 +106,7 @@
 .co-year {
   font-size: 14px;
   color: var(--opaque-text-color);
-  font-weight: 300;
+  font-weight: 700;
 }
 
 .co-title {
@@ -119,9 +119,13 @@
   padding: 0 5px 10px 5px;
   color: var(--soothed-text-color);
   word-wrap: normal;
+  overflow: hidden;
   word-break: break-all;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
-
 
 
 .co-body {

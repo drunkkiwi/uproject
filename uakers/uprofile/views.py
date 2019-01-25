@@ -7,15 +7,18 @@ from itertools                          import chain
 from operator                           import attrgetter
 from django.urls                        import reverse_lazy
 from django.views.generic.edit          import DeleteView
+from .forms                             import QuestionPostForm, AnswerPostForm
 
 
 
 # -------------------------------- PROFILE PAGE --------------------------------------
 def profile_view(request, profile_slug=''):
 
+    # --------- initial variables -------
     isuser = False
     have_followed_them = False
 
+    # ----------- if user is authenticated then see if it is requests user -----------
     if profile_slug == '':
         if request.user.is_authenticated:
             isuser = True
@@ -23,29 +26,37 @@ def profile_view(request, profile_slug=''):
         else:
             return redirect('home:home_view')
 
+
+    # --------------------------- FIND THE USER PROFILE -----------------------------------
     user_profile = UserProfile.objects.get(profile_slug=profile_slug)
     user_confession_number = Confessions.objects.filter(confession_author=user_profile).count()
 
+    # ---------------------- if there is user and they have followed ----------------------------
     if request.user.is_authenticated:
         if FollowProfile.objects.filter(follow_init=request.user, follow_rec=user_profile).exists():
             have_followed_them = True
 
-    followed_nr = FollowProfile.objects.filter(follow_rec=user_profile).count()
-    following_nr = FollowProfile.objects.filter(follow_init=user_profile).count()
 
-
+    # --------------------------------- All posts ----------------------------------
     user_questions = QuestionPost.objects.filter(question_directed=user_profile).all()
     user_confessions = Confessions.objects.filter(confession_author=user_profile).all()
 
 
+    # --------------------- Coupled together and sorted posts ---------------------
     user_posts = sorted(
         chain(user_questions, user_confessions),
         key=attrgetter('date_created_at'),
         reverse=True)
 
 
+    # ------------------------------- is req.user the profile? -------------------------
     if user_profile == request.user:
         isuser = True
+
+    # ------------------------ QuestionPost and AnswerPost forms ----------------------
+    if request.method == 'GET':
+        qu_form = QuestionPostForm()
+        ans_form = AnswerPostForm()
 
     context = {
         'user_posts': user_posts,
@@ -54,12 +65,40 @@ def profile_view(request, profile_slug=''):
         'user_confession_number': user_confession_number,
         'isuser': isuser,
         'have_followed_them': have_followed_them,
-        'followed_nr': followed_nr,
-        'following_nr': following_nr,
+        'qu_form': qu_form,
+        'ans_form': ans_form,
     }
     return render(request, 'uprofile/profile_view.html', context)
 
 
+# ------------------------------ Create question ---------------------------
+def question_post_view(request, rec_profile_slug):
+    redirect_next_page = request.POST.get('next_page', '/')
+    rec_question_profile = UserProfile.objects.get(profile_slug=rec_profile_slug)
+    qu_form = QuestionPostForm(request.POST)
+    if request.method == 'POST':
+        if qu_form.is_valid():
+            temp = qu_form.save(commit=False)
+            temp.question_author = request.user
+            temp.question_directed = rec_question_profile
+            temp.save()
+            return redirect(redirect_next_page)
+
+    return redirect('home:home_view')
+
+def answer_post_view(request, question_instance_slug):
+    redirect_next_page = request.POST.get('next_page', '/')
+    question_instance = QuestionPost.objects.get(question_slug=question_instance_slug)
+    ans_form = AnswerPostForm(request.POST)
+    if request.method == 'POST':
+        if ans_form.is_valid():
+            temp = ans_form.save(commit=False)
+            temp.answer_author = request.user
+            temp.answer_question = question_instance
+            temp.save()
+            return redirect(redirect_next_page)
+
+    return redirect('home:home_view')
 
 # ------------------------- Delete question / answers --------------------------
 class QuestionDeleteView(DeleteView):

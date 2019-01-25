@@ -1,3 +1,4 @@
+{% load main_external_filters %}
 <div class="co-unique">
 
   <div class="co-up">
@@ -6,13 +7,16 @@
     </a>
     <div class="co-meta-text">
       <div class="co-meta-usr-date">
-        <span class="co-meta-usr">
-          {{ unique_confession.confession_author.username }}
+        <span class="co-meta-usr {{ unique_confession.confession_author|m_or_f_color }}">
+          {{ unique_confession.confession_author.profile_nickname }}
         </span>
         <span class="co-meta-date ff-num">
           {{ unique_confession.date_created_at|timesince }} ago
         </span>
       </div>
+      <span class="co-meta-username">
+        @{{ unique_confession.confession_author.username }}
+      </span>
 
       <div class="co-meta-title-div">
         <p class="co-meta-title">{{ unique_confession.confession_title }}</p>

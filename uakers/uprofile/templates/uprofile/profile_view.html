@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load main_external_filters %}
+{% load follow_numbers %}
 {% block title %}{{ user_profile.username }}{% endblock %}
 
 
@@ -26,7 +27,8 @@
         <div class='left-photo-div'>
           <div class="left-photo" style="background-image: url({{ user_profile.profile_image }})">
           </div>
-          <span class="left-meta-uy {{user_profile|m_or_f_color}}">{{ user_profile.username }}</span>
+          <p class="left-meta-uy {{user_profile|m_or_f_color}}">{{ user_profile.profile_nickname }}</p>
+          <p class="left-meta-uys">@{{ user_profile.username}}</p>
         </div>
 
         <div class="left-meta-info-wrap">
@@ -43,11 +45,11 @@
           </span>
           <a href="{% url 'uprofile:followed_view' user_profile.profile_slug %}" class="left-meta-info">
             Followed:
-            {{ followed_nr }}
+            {{ user_profile|rec_followed_by }}
           </a>
           <a href="{% url 'uprofile:following_view' user_profile.profile_slug %}" class="left-meta-info">
             Following:
-            {{ following_nr }}
+            {{ user_profile|rec_following }}
           </a>
         </div>
         {% if request.user.is_authenticated %}
@@ -71,6 +73,12 @@
     <div class="right-user">
 
       <div class="right-full">
+
+        {% if request.user.is_authenticated %}
+        {% if not isuser %}
+        {% include 'uprofile/profile_view_question_post.html' %}
+        {% endif %}
+        {% endif %}
 
 
         {% if user_posts %}

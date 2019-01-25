@@ -9,7 +9,11 @@ urlpatterns = [
     path('<slug:profile_slug>', views.profile_view, name='profile_view'),
     path('', views.profile_view, name='profile_view'),
 
-    # -------------------- delete quesiton --- answer ------------------
+    # ---------------------- post question --- naswer -------------------
+    path('post/question/<slug:rec_profile_slug>', views.question_post_view, name='question_post_view'),
+    path('post/answer/<slug:question_instance_slug>', views.answer_post_view, name='answer_post_view'),
+
+    # -------------------- delete question --- answer ------------------
     path('delete/question/<slug:question_slug>', views.QuestionDeleteView.as_view(), name='question_delete_view'),
 
     # ------------------------ Follow function view -----------------------------
@@ -18,4 +22,5 @@ urlpatterns = [
     # ------------------- Followed / Following page view --------------------
     path('followed/<slug:profile_slug>', views.followed_view, name='followed_view'),
     path('following/<slug:profile_slug>', views.following_view, name='following_view'),
+
 ]

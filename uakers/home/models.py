@@ -8,6 +8,7 @@ from .external_functions                import CustomUsernameValidator
 
 # -------------------------- CUSTOM USER PROFILE ------------------------------
 class UserProfile(AbstractUser):
+    profile_nickname        = models.CharField(max_length=35)
     profile_year            = models.CharField(max_length=2, choices=YCHOICES)
     profile_sex             = models.CharField(max_length=1, choices=SCHOICES)
     profile_image           = models.CharField(max_length=700, blank=True)
@@ -23,6 +24,10 @@ class UserProfile(AbstractUser):
 
 
     def save(self, *args, **kwargs):
+        if not self.profile_nickname:
+            self.profile_nickname = self.username
+
+
         if self.profile_song:
             if self.profile_song[:5] == 'https':
                 self.profile_song = 'https://www.youtube.com/embed/' + str(self.profile_song[32:])

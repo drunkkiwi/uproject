@@ -5,8 +5,8 @@
       <div class="comment-photo" style="background-image: url({{ request.user.profile_image }})"></div>
     </div>
     <div class="comment-up-text">
-      <p class="comment-up-username">
-        {{ request.user.username }}
+      <p class="comment-up-nickname">
+        {{ request.user.profile_nickname }}
       </p>
     </div>
   </div>
@@ -15,6 +15,7 @@
       <form class="comment-form" action="" method="post">
         {% csrf_token %}
         {{ co_form.comment_body }}
+        <input type="hidden" name="next_page" value="{{ request.path }}">
         <button class="comment-sub-btn" type="submit">Comment</button>
       </form>
     </div>

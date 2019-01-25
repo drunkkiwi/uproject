@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ unique_confession.confession_title }}{% endblock %}
+{% block title %}
+{% if unique_confession.confession_title %}
+{{ unique_confession.confession_title }}
+{% else %}
+{{ unique_confession.confession_body|truncatechars:60 }}
+{% endif %}
+{% endblock %}
 
 
 {% block css %}
