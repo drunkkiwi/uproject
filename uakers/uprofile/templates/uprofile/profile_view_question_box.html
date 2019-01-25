@@ -1,3 +1,4 @@
+{% load main_external_filters %}
 <div class="quans_container">
 
   <div class="quans_box qb_que">
@@ -12,7 +13,7 @@
     <div class="quans_body">
 
       <div class="quans_meta_text">
-        <p class="quans_meta_username {% if cons.question_author.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ cons.question_author.username }}</p>
+        <p class="quans_meta_username {{cons.question_author|m_or_f_color}}">{{ cons.question_author.username }}</p>
         <p class="quans_meta_date">{{ cons.date_created_at }}</p>
       </div>
       {{ cons.question_body|linebreaks }}
@@ -42,7 +43,7 @@
 
     <div class="quans_body">
       <div class="quans_meta_text qmt2">
-        <p class="quans_meta_username {% if answer.answer_author.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ answer.answer_author.username }}</p>
+        <p class="quans_meta_username {{answer.answer_author|m_or_f_color}}">{{ answer.answer_author.username }}</p>
         <p class="quans_meta_date">{{ answer.answer_created_at }}</p>
       </div>
       {{ answer.answer_body|linebreaks }}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load follow_numbers %}
+{% block title %}{{ user_profile.username }} - following {% endblock %}
+
+{% block upro-underbar-up %}{% if isuser %}mn-underbar-up{% endif %}{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'uprofile/css/follow_view.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <div class="follow_container">
+    {% if following_profiles %}
+    {% for follow in following_profiles %}
+    {% with follow_user=follow.follow_rec %}
+    {% include 'uprofile/follow_view_box.html' %}
+    {% endwith %}
+    {% endfor %}
+    {% else %}
+    <span class="no_follow_container">
+      This user is following nobody
+    </span>
+    {% endif %}
+  </div>
+
+  <div class="bg-overlayer">
+  </div>
+
+{% endblock %}

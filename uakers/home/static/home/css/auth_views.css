@@ -121,5 +121,12 @@ input:-webkit-autofill:focus {
 }
 
 .auth-l-error ul li {
+  list-style-type: none;
   font-size: 14px;
+  color: var(--warning-main-color);
+  font-weight: 700;
+}
+
+.auth-l-error ul {
+  list-style-type: none;
 }

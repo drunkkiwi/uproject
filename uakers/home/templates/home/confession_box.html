@@ -1,3 +1,4 @@
+{% load main_external_filters %}
 <div class="confession_box confession_profile">
 
   <div class="co-main">
@@ -5,7 +6,7 @@
       <div class="co_photo_meta_div">
         <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co_photo" style="background-image: url({{ cons.confession_author.profile_image }})"></a>
         <div class="co-aut-year">
-          <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co-aut {% if cons.confession_author.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ cons.confession_author.username }}</a>
+          <a href="{% url 'uprofile:profile_view' cons.confession_author.profile_slug %}" class="co-aut {{cons.confession_author|m_or_f_color}}">{{ cons.confession_author.username }}</a>
           <span class="co-year">{{ cons.date_created_at|timesince }} ago</span>
           <span class="co-year">#{{ cons.id }}</span>
         </div>
@@ -21,9 +22,11 @@
       </div>
     </div>
 
-    <div class="co-down-text">
-      {{ cons.confession_body|linebreaks|truncatewords:60 }}
-    </div>
+    <a href="{% url 'home:confession_view' cons.confession_slug %}">
+      <div class="co-down-text">
+        {{ cons.confession_body|linebreaks|truncatewords:60 }}
+      </div>
+    </a>
   </div>
 
   <div class="co-rank">

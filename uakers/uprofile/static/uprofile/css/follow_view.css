@@ -1,0 +1,101 @@
+body {
+  /*background-image: url('https://i.pinimg.com/originals/07/cf/ee/07cfeef6d751799d35c636aa16cade05.gif');*/
+  background-image: url('https://images.pexels.com/photos/1064136/pexels-photo-1064136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+}
+
+.bg-overlayer {
+  background-color: var(--main-background-color);
+  opacity: 0.8;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.follow_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.follow_box {
+  background-color: var(--lighter-background-color);
+  border-radius: 6px;
+  border: 2px solid var(--lighter-background-color);
+  overflow: hidden;
+  margin: 0 5px;
+}
+
+.follow_upper {
+  background-color: var(--main-background-color);
+}
+
+.follow_photo_usr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 60px;
+}
+
+.follow_photo {
+  height: 110px;
+  width: 110px;
+  border-radius: 55px;
+  background-size: cover;
+  background-position: center;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid var(--lighter-background-color);
+}
+
+.follow_usr {
+  color: var(--soothed-text-color);
+  font-size: 16px;
+}
+
+.follow_down {
+  background-color: var(--lighter-background-color);
+  padding: 10px;
+}
+
+.follow_down_text {
+  color: var(--soothed-text-color);
+  font-size: 16px;
+}
+
+.follow_down_hflex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lmi-m {
+  color: var(--male-main-color);
+}
+
+.lmi-f {
+  color: var(--female-main-color);
+}
+
+
+/* ------------------------- NO FOLLOW CONTAINER ------------------------- */
+
+.no_follow_container {
+  padding: 4px 12px;
+  background-color: var(--main-background-color);
+  border: 1px solid var(--lighter-background-color);
+  color: var(--soothed-text-color);
+  border-radius: 5px;
+}

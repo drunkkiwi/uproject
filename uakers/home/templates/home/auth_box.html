@@ -22,7 +22,7 @@
       <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% else %}Log in{% endif %}</button>
     </div>
     {% if form.errors %}
-    <div class="auth-l-error rotateIn">
+    <div class="auth-l-error">
       {{ form.errors }}
     </div>
     {% endif %}

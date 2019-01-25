@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load main_external_filters %}
 {% block title %}{{ user_profile.username }}{% endblock %}
 
 
@@ -22,39 +23,47 @@
     <div class="left-user-div">
       <div class="left-user">
 
-        <div class="left-photo-div" style="background-image: url({{ user_profile.profile_image }})">
+        <div class='left-photo-div'>
+          <div class="left-photo" style="background-image: url({{ user_profile.profile_image }})">
+          </div>
+          <span class="left-meta-uy {{user_profile|m_or_f_color}}">{{ user_profile.username }}</span>
         </div>
 
-        <div class="left-meta-info">
-          <p class="left-meta-info-p {% if user_profile.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.username }}</p>
+        <div class="left-meta-info-wrap">
+          <span class="left-meta-info">
+            {{ user_profile.get_profile_sex_display }}
+          </span>
+          <span class="left-meta-info left-meta-co">
+            Confessions:
+            {{ user_confession_number }}
+          </span>
+          <span class="left-meta-info left-meta-qu">
+            Question & Answers:
+            {{ user_questions.count }}
+          </span>
+          <a href="{% url 'uprofile:followed_view' user_profile.profile_slug %}" class="left-meta-info">
+            Followed:
+            {{ followed_nr }}
+          </a>
+          <a href="{% url 'uprofile:following_view' user_profile.profile_slug %}" class="left-meta-info">
+            Following:
+            {{ following_nr }}
+          </a>
         </div>
-        <div class="left-meta-info">
-          <p class="left-meta-info-p {% if user_profile.get_profile_sex_display == 'Female' %} lmi-f {% else %}lmi-m{% endif %}">{{ user_profile.get_profile_sex_display }}</p>
-        </div>
-        <div class="left-meta-info">
-          <p class="left-meta-info-p">{{ user_profile.get_profile_year_display }}</p>
-        </div>
-        <div class="left-meta-info lmiflex left-meta-co">
-          <p class="left-meta-info-p">Confessions</p>
-          <span class="left-meta-info-s">{{ user_confession_number }}</span>
-        </div>
-        <div class="left-meta-info lmiflex left-meta-qu">
-          <p class="left-meta-info-p">Question & Answers</p>
-          <span class="left-meta-info-s">{{ user_questions.count }}</span>
-        </div>
-        <div class="left-meta-info lmiflex">
-          <p class="left-meta-info-p">Followed</p>
-          <span class="left-meta-info-s">{{ fo_nr }}</span>
-        </div>
-        <div class="left-meta-info lmiflex">
-          <p class="left-meta-info-p">Following</p>
-          <span class="left-meta-info-s">{{ following_nr }}</span>
-        </div>
-        {% if not isuser and not have_followed_them %}
-        <div class="left-meta-info lmi-div">
+        {% if request.user.is_authenticated %}
+        {% if not isuser %}
+        {% if not have_followed_them %}
+        <div class="lmi-div">
           <a href="{% url 'uprofile:follow_profile_view' request.user.profile_slug user_profile.profile_slug %}" class="left-meta-btn">Follow</a>
         </div>
+        {% else %}
+        <div class="lmi-div">
+          <a href="{% url 'uprofile:follow_profile_view' request.user.profile_slug user_profile.profile_slug %}" class="left-meta-btn left-meta-btn-followed">Followed</a>
+        </div>
         {% endif %}
+        {% endif %}
+        {% endif %}
+
 
       </div>
     </div>
@@ -64,6 +73,7 @@
       <div class="right-full">
 
 
+        {% if user_posts %}
         {% for cons in user_posts %}
         {% if cons.question_body %}
         {% include 'uprofile/profile_view_question_box.html' %}
@@ -71,6 +81,11 @@
         {% include 'home/confession_box.html' %}
         {% endif %}
         {% endfor %}
+        {% else %}
+        <span class="no_post_notice">
+          There are no posts for this user
+        </span>
+        {% endif %}
 
       </div>
 

@@ -92,7 +92,7 @@ body {
   background-color: var(--darker-background-color);
   border: 1px solid var(--lighter-background-color);
   margin: 10px 0px;
-  border-radius: 2px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -122,6 +122,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 5px;
 }
 
 .co-main-post {

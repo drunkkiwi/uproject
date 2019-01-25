@@ -4,14 +4,23 @@ from django.db.models.signals           import post_save
 from django.dispatch                    import receiver
 from django.db                          import models
 from .choices                           import *
+from .external_functions                import CustomUsernameValidator
 
 # -------------------------- CUSTOM USER PROFILE ------------------------------
 class UserProfile(AbstractUser):
     profile_year            = models.CharField(max_length=2, choices=YCHOICES)
     profile_sex             = models.CharField(max_length=1, choices=SCHOICES)
     profile_image           = models.CharField(max_length=700, blank=True)
-    profile_slug            = models.SlugField(blank=True, max_length=900)
+    profile_slug            = models.SlugField(blank=True, max_length=900, unique=True)
     profile_song            = models.CharField(max_length=300, blank=True, null=True)
+
+    def __init__(self, *args, **kwargs):
+        self._meta.get_field(
+            'username'
+        ).validators[0] = CustomUsernameValidator()
+
+        super().__init__(*args, **kwargs)
+
 
     def save(self, *args, **kwargs):
         if self.profile_song:
@@ -51,14 +60,14 @@ class Confessions(models.Model):
     confession_slug         = models.SlugField(blank=True, max_length=900)
 
     def save(self, *args, **kwargs):
-        ctitle = self.confession_title
+        cbody = self.confession_body[:60]
 
         if not self.id:
-            if Confessions.objects.filter(confession_slug=slugify(ctitle)).exists():
-                count = Confessions.objects.filter(confession_slug__startswith=slugify(ctitle)).exclude(pk=self.id).count()
-                self.confession_slug = slugify(ctitle + str(count))
+            if Confessions.objects.filter(confession_slug=slugify(cbody)).exists():
+                count = Confessions.objects.filter(confession_slug__startswith=slugify(cbody)).exclude(pk=self.id).count()
+                self.confession_slug = slugify(cbody + str(count))
             else:
-                self.confession_slug = slugify(ctitle)
+                self.confession_slug = slugify(cbody)
         super(Confessions, self).save(*args, **kwargs)
 
 

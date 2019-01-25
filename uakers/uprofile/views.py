@@ -26,16 +26,18 @@ def profile_view(request, profile_slug=''):
     user_profile = UserProfile.objects.get(profile_slug=profile_slug)
     user_confession_number = Confessions.objects.filter(confession_author=user_profile).count()
 
-    if FollowProfile.objects.filter(follow_init=request.user, follow_rec=user_profile).exists():
-        have_followed_them = True
+    if request.user.is_authenticated:
+        if FollowProfile.objects.filter(follow_init=request.user, follow_rec=user_profile).exists():
+            have_followed_them = True
 
-    fo_nr = FollowProfile.objects.filter(follow_rec=user_profile).count()
+    followed_nr = FollowProfile.objects.filter(follow_rec=user_profile).count()
     following_nr = FollowProfile.objects.filter(follow_init=user_profile).count()
 
 
     user_questions = QuestionPost.objects.filter(question_directed=user_profile).all()
     user_confessions = Confessions.objects.filter(confession_author=user_profile).all()
-    # descending order
+
+
     user_posts = sorted(
         chain(user_questions, user_confessions),
         key=attrgetter('date_created_at'),
@@ -52,7 +54,7 @@ def profile_view(request, profile_slug=''):
         'user_confession_number': user_confession_number,
         'isuser': isuser,
         'have_followed_them': have_followed_them,
-        'fo_nr': fo_nr,
+        'followed_nr': followed_nr,
         'following_nr': following_nr,
     }
     return render(request, 'uprofile/profile_view.html', context)
@@ -71,6 +73,7 @@ class QuestionDeleteView(DeleteView):
 
 
 # ------------------------- Follow profile --------------------------------------
+@login_required
 def follow_profile_view(request, init_profile_slug, rec_profile_slug):
 
     init_profile = UserProfile.objects.get(profile_slug=init_profile_slug)
@@ -80,6 +83,47 @@ def follow_profile_view(request, init_profile_slug, rec_profile_slug):
         FollowProfile.objects.create(follow_init=init_profile, follow_rec=rec_profile)
         return redirect('uprofile:profile_view')
     else:
-        return redirect('uprofile:profile_view')
+        FollowProfile.objects.filter(follow_init=init_profile, follow_rec=rec_profile).delete()
 
     return redirect('uprofile:profile_view')
+
+
+
+# ------------------------- Followed /// Following views --------------------------
+def followed_view(request, profile_slug):
+
+    isuser = False
+    user_profile = UserProfile.objects.get(profile_slug=profile_slug)
+
+    if user_profile == request.user:
+        isuser = True
+
+    followed_by_profiles = FollowProfile.objects.filter(follow_rec=user_profile)
+
+    context = {
+        'user_profile': user_profile,
+        'followed_by_profiles': followed_by_profiles,
+        'isuser': isuser,
+    }
+
+    return render(request, 'uprofile/followed_view.html', context)
+
+
+
+def following_view(request, profile_slug):
+
+    isuser = False
+    user_profile = UserProfile.objects.get(profile_slug=profile_slug)
+
+    if user_profile == request.user:
+        isuser = True
+
+    following_profiles = FollowProfile.objects.filter(follow_init=user_profile)
+
+    context = {
+        'user_profile': user_profile,
+        'following_profiles': following_profiles,
+        'isuser': isuser,
+    }
+
+    return render(request, 'uprofile/following_view.html', context)

@@ -13,6 +13,7 @@
   justify-content: space-between;
   border-radius: 6px;
   position: relative;
+  padding: 10px;
 }
 
 
@@ -28,7 +29,8 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 15px 20px 5px 15px;
+  /*padding: 15px 20px 5px 15px;*/
+  padding-bottom: 5px;
 }
 
 .co_photo_meta_div {
@@ -42,6 +44,11 @@
   right: 0px;
   top: 0px;
   color: var(--soothed-text-color);
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .co-up-delete {
@@ -108,9 +115,14 @@
 }
 
 .co-down-text {
-  padding: 5px 20px 10px 20px;
+  /*padding: 5px 20px 10px 20px;*/
+  padding: 0 5px 10px 5px;
   color: var(--soothed-text-color);
+  word-wrap: normal;
+  word-break: break-all;
 }
+
+
 
 .co-body {
   color: var(--soothed-text-color);
@@ -121,7 +133,7 @@
   border-top: 2px solid var(--main-background-color);
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 20px 0 20px;
 }
 
 .co-upd-div {
