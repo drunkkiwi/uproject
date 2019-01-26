@@ -1,16 +1,18 @@
-from django.shortcuts                   import render, redirect, get_object_or_404
-from home.models                        import UserProfile
 from uprofile.models                    import QuestionPost, AnswerPost, FollowProfile
-from home.models                        import Confessions
-from django.contrib.auth.decorators     import login_required
-from itertools                          import chain
-from operator                           import attrgetter
-from django.urls                        import reverse_lazy
-from django.views.generic.edit          import DeleteView
+from django.shortcuts                   import render, redirect, get_object_or_404
+from django.views.generic.edit          import CreateView, UpdateView, DeleteView
 from .forms                             import QuestionPostForm, AnswerPostForm
+from django.contrib.auth.mixins         import LoginRequiredMixin
+from django.contrib.auth.decorators     import login_required
+from django.urls                        import reverse_lazy
+from home.models                        import UserProfile
+from home.models                        import Confessions
+from operator                           import attrgetter
+from itertools                          import chain
 
 
-
+# -------------------------------- PROFILE PAGE --------------------------------------
+# -------------------------------- PROFILE PAGE --------------------------------------
 # -------------------------------- PROFILE PAGE --------------------------------------
 def profile_view(request, profile_slug=''):
 
@@ -71,6 +73,22 @@ def profile_view(request, profile_slug=''):
     return render(request, 'uprofile/profile_view.html', context)
 
 
+# ----------------------------- Edit profile --------------------------------
+# ----------------------------- Edit profile --------------------------------
+# ----------------------------- Edit profile --------------------------------
+class UserProfileUpdate(UpdateView):
+    model = UserProfile
+    fields = ['profile_nickname', 'profile_image', 'profile_year', 'profile_sex', 'profile_song']
+    template_name = 'uprofile/profile_update_view.html'
+    success_url = '/profile/v'
+
+
+    def get_object(self):
+        object = get_object_or_404(UserProfile, profile_slug=self.request.user.profile_slug)
+        return object
+
+# ------------------------------ Create question ---------------------------
+# ------------------------------ Create question ---------------------------
 # ------------------------------ Create question ---------------------------
 def question_post_view(request, rec_profile_slug):
     redirect_next_page = request.POST.get('next_page', '/')
@@ -101,6 +119,8 @@ def answer_post_view(request, question_instance_slug):
     return redirect('home:home_view')
 
 # ------------------------- Delete question / answers --------------------------
+# ------------------------- Delete question / answers --------------------------
+# ------------------------- Delete question / answers --------------------------
 class QuestionDeleteView(DeleteView):
     model = Confessions
     success_url = reverse_lazy('uprofile:profile_view')
@@ -111,6 +131,8 @@ class QuestionDeleteView(DeleteView):
 
 
 
+# ------------------------- Follow profile --------------------------------------
+# ------------------------- Follow profile --------------------------------------
 # ------------------------- Follow profile --------------------------------------
 @login_required
 def follow_profile_view(request, init_profile_slug, rec_profile_slug):
@@ -128,6 +150,8 @@ def follow_profile_view(request, init_profile_slug, rec_profile_slug):
 
 
 
+# ------------------------- Followed /// Following views --------------------------
+# ------------------------- Followed /// Following views --------------------------
 # ------------------------- Followed /// Following views --------------------------
 def followed_view(request, profile_slug):
 

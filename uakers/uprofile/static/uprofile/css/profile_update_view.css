@@ -1,0 +1,19 @@
+body {
+  background-image: url('https://images.pexels.com/photos/1213997/pexels-photo-1213997.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+}
+
+.bg-overlayer {
+  background-color: var(--main-background-color);
+  opacity: 0.6;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}

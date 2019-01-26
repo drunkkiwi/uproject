@@ -19,7 +19,7 @@
   {% endfor %}
   <!-- ----------- Authentication submit button --------------- -->
     <div class="auth-cont-btn">
-      <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% else %}Log in{% endif %}</button>
+      <button class="auth-btn" type="submit">{% if sign_up_btn %}{{ sign_up_btn }}{% elif request.path == '/profile/update' %}Update{% else %}Log in{% endif %}</button>
     </div>
     {% if form.errors %}
     <div class="auth-l-error">

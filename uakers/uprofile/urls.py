@@ -6,8 +6,11 @@ app_name = "uprofile"
 
 urlpatterns = [
     # ----------------------- profile views ---------------------------
-    path('<slug:profile_slug>', views.profile_view, name='profile_view'),
-    path('', views.profile_view, name='profile_view'),
+    path('v/<slug:profile_slug>', views.profile_view, name='profile_view'),
+    path('v', views.profile_view, name='profile_view'),
+
+    # ---------------------------- edit profile ------------------------------
+    path('update', views.UserProfileUpdate.as_view(), name='user_profile_update_view'),
 
     # ---------------------- post question --- naswer -------------------
     path('post/question/<slug:rec_profile_slug>', views.question_post_view, name='question_post_view'),

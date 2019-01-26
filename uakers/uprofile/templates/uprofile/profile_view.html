@@ -32,7 +32,7 @@
         </div>
 
         <div class="left-meta-info-wrap">
-          <span class="left-meta-info">
+          <span class="left-meta-info {{ user_profile|m_or_f_color}}">
             {{ user_profile.get_profile_sex_display }}
           </span>
           <span class="left-meta-info left-meta-co">
@@ -64,6 +64,12 @@
         </div>
         {% endif %}
         {% endif %}
+        {% endif %}
+
+        {% if isuser %}
+        <div class="lmi-div">
+          <a href="{% url 'uprofile:user_profile_update_view' %}" class="left-meta-info left-meta-info-hov">Edit Profile</a>
+        </div>
         {% endif %}
 
 

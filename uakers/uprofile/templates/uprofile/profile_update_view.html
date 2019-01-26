@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load follow_numbers %}
+{% block title %}{{ request.user.username }} -- edit {% endblock %}
+
+{% block upro-underbar-up %}mn-underbar-up{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home/css/auth_views.css' %}">
+  <link rel="stylesheet" href="{% static 'uprofile/css/profile_update_view.css'%}">
+{% endblock %}
+
+{% block body %}
+  <div class="bg-overlayer">
+  </div>
+
+  <div class="rest-auth">
+    <div class="auth-options">
+      {% include 'home/auth_box.html' %}
+    </div>
+  </div>
+{% endblock %}

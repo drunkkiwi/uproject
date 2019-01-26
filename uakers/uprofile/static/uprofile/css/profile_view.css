@@ -4,6 +4,7 @@ body {
   background-image: url('https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 }
 
 .bg-overlayer {
@@ -30,9 +31,9 @@ body {
 
 .left-user {
   position: fixed;
-  width: 250px;
-  min-width: 250px;
-  max-width: 250px;
+  width: 275px;
+  min-width: 275px;
+  max-width: 275px;
   min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
@@ -41,6 +42,7 @@ body {
   overflow-x: hidden;
   z-index: 900;
   border: 1px solid var(--darker-background-color);
+  border-top: none;
 }
 
 .left-photo-div {
@@ -52,6 +54,7 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: var(--darker-background-color);
+  border-top: 1px solid var(--main-background-color);
 }
 
 .left-photo {
@@ -92,6 +95,10 @@ body {
   color: var(--soothed-text-color);
   font-size: 16px;
   border-radius: 5px;
+}
+
+.left-meta-info:hover {
+  background-color: var(--darker-background-color);
 }
 
 .left-meta-co {
@@ -262,10 +269,12 @@ iframe {
 /* ------------------------- LMI ---------------------------- */
 .lmi-f {
   color: var(--female-main-color);
+  border-color: var(--female-main-color);
 }
 
 .lmi-m {
   color: var(--male-main-color);
+  border-color: var(--male-main-color);
 }
 
 
@@ -296,12 +305,12 @@ iframe {
   outline: none;
   border: none;
   background-color: var(--main-background-color);
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid var(--lighter-background-color);
   box-sizing: border-box;
   padding: 5px 10px;
   width: 95%;
-  height: 50px;
+  height: 35px;
   color: var(--soothed-text-color);
 }
 
@@ -314,12 +323,12 @@ iframe {
   outline: none;
   border: none;
   background-color: var(--main-background-color);
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid var(--lighter-background-color);
   box-sizing: border-box;
   padding: 5px 10px;
   width: 95%;
-  height: 50px;
+  height: 35px;
   color: var(--soothed-text-color);
 }
 
