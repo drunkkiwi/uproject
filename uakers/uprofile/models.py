@@ -9,7 +9,7 @@ from home.models                        import UserProfile
 class FollowProfile(models.Model):
     follow_init             = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='follow_init')
     follow_rec              = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='follow_rec')
-    follow_created_at      = models.DateTimeField(auto_now_add=True)
+    follow_created_at       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.follow_init) + ', ' + str(self.follow_rec) + ', ' + str(self.follow_created_at)

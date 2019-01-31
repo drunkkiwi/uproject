@@ -115,12 +115,14 @@
 }
 
 .co-down-text {
-  /*padding: 5px 20px 10px 20px;*/
   padding: 0 5px 10px 5px;
   color: var(--soothed-text-color);
   word-wrap: normal;
   overflow: hidden;
-  word-break: break-all;
+}
+
+.co-down-text {
+  overflow-wrap: break-word;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
