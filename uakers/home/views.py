@@ -6,6 +6,7 @@ from django.core.paginator      import EmptyPage, PageNotAnInteger, Paginator
 from django.http                import JsonResponse
 from django.urls                import reverse_lazy
 from django.views.generic.edit  import DeleteView
+from notifications.models       import Notification
 
 
 
@@ -128,6 +129,9 @@ def upvote_view(request, co_type, co_slug):
                 upvote_co.confession_upvotes_int += 1
                 upvote_co.save()
                 alert_message = "Upvoted"
+                notification_slug = str(upvote_co.confession_slug)
+                if not request.user == upvote_co.confession_author:
+                    Notification.objects.create(notification_init=request.user, notification_rec=upvote_co.confession_author, notification_type='likeConf', notification_target=notification_slug)
 
             alert_upvote_int = upvote_co.confession_upvotes_int
 
@@ -147,6 +151,10 @@ def upvote_view(request, co_type, co_slug):
                 upvote_co.comment_upvotes_int += 1
                 upvote_co.save()
                 alert_message = "Upvoted"
+
+                notification_slug = str(upvote_co.confession_slug)
+                if not request.user == upvote_co.comment_author:
+                    Notification.objects.create(notification_init=request.user, notification_rec=upvote_co.confession_author, notification_type='likeCom', notification_target=notification_slug)
 
             alert_upvote_int = upvote_co.comment_upvotes_int
 

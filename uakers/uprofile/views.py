@@ -1,14 +1,17 @@
-from uprofile.models                    import QuestionPost, AnswerPost, FollowProfile
-from django.shortcuts                   import render, redirect, get_object_or_404
-from django.views.generic.edit          import CreateView, UpdateView, DeleteView
-from .forms                             import QuestionPostForm, AnswerPostForm
-from django.contrib.auth.mixins         import LoginRequiredMixin
-from django.contrib.auth.decorators     import login_required
-from django.urls                        import reverse_lazy
-from home.models                        import UserProfile
-from home.models                        import Confessions
-from operator                           import attrgetter
+# ---------------------- Apps and main django apps --------------------------
 from itertools                          import chain
+from operator                           import attrgetter
+from home.models                        import Confessions
+from home.models                        import UserProfile
+from notifications.models               import Notification
+from django.urls                        import reverse_lazy
+from django.contrib.auth.decorators     import login_required
+from django.contrib.auth.mixins         import LoginRequiredMixin
+from .forms                             import QuestionPostForm, AnswerPostForm
+from django.views.generic.edit          import CreateView, UpdateView, DeleteView
+from django.shortcuts                   import render, redirect, get_object_or_404
+from uprofile.models                    import QuestionPost, AnswerPost, FollowProfile
+
 
 
 # -------------------------------- PROFILE PAGE --------------------------------------
@@ -23,15 +26,20 @@ def profile_view(request, profile_slug=''):
     # ----------- if user is authenticated then see if it is requests user -----------
     if profile_slug == '':
         if request.user.is_authenticated:
-            isuser = True
             profile_slug = request.user.profile_slug
         else:
             return redirect('home:home_view')
 
-
     # --------------------------- FIND THE USER PROFILE -----------------------------------
     user_profile = UserProfile.objects.get(profile_slug=profile_slug)
     user_confession_number = Confessions.objects.filter(confession_author=user_profile).count()
+
+
+    # ------------------------------- is req.user the profile? -------------------------
+    if user_profile == request.user:
+        isuser = True
+
+
 
     # ---------------------- if there is user and they have followed ----------------------------
     if request.user.is_authenticated:
@@ -49,11 +57,6 @@ def profile_view(request, profile_slug=''):
         chain(user_questions, user_confessions),
         key=attrgetter('date_created_at'),
         reverse=True)
-
-
-    # ------------------------------- is req.user the profile? -------------------------
-    if user_profile == request.user:
-        isuser = True
 
     # ------------------------ QuestionPost and AnswerPost forms ----------------------
     if request.method == 'GET':
@@ -114,6 +117,7 @@ def answer_post_view(request, question_instance_slug):
             temp.answer_author = request.user
             temp.answer_question = question_instance
             temp.save()
+
             return redirect(redirect_next_page)
 
     return redirect('home:home_view')
@@ -135,16 +139,21 @@ class QuestionDeleteView(DeleteView):
 # ------------------------- Follow profile --------------------------------------
 # ------------------------- Follow profile --------------------------------------
 @login_required
-def follow_profile_view(request, init_profile_slug, rec_profile_slug):
+def follow_profile_view(request, rec_profile_slug):
 
-    init_profile = UserProfile.objects.get(profile_slug=init_profile_slug)
+    init_profile = request.user
     rec_profile = UserProfile.objects.get(profile_slug=rec_profile_slug)
+
 
     if not FollowProfile.objects.filter(follow_init=init_profile, follow_rec=rec_profile).exists():
         FollowProfile.objects.create(follow_init=init_profile, follow_rec=rec_profile)
+
+        Notification.objects.create(notification_init=init_profile, notification_rec=rec_profile, notification_type='follow')
+
         return redirect('uprofile:profile_view')
     else:
         FollowProfile.objects.filter(follow_init=init_profile, follow_rec=rec_profile).delete()
+        return redirect('uprofile:profile_view')
 
     return redirect('uprofile:profile_view')
 

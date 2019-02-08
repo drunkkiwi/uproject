@@ -35,9 +35,7 @@ INSTALLED_APPS = [
     # --- web apps ----
     'home.apps.HomeConfig',
     'uprofile.apps.UprofileConfig',
-
-    # ------ channels -------
-    'channels',
+    'notifications.apps.NotificationsConfig',
 
     # ----- djangoo -----
     'django.contrib.admin',
@@ -46,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 ]
 
 AUTH_USER_MODEL = 'home.UserProfile'
@@ -132,5 +129,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
-
-ASGI_APPLICATION = 'uakers.routing.application'

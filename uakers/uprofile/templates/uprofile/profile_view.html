@@ -56,11 +56,11 @@
         {% if not isuser %}
         {% if not have_followed_them %}
         <div class="lmi-div">
-          <a href="{% url 'uprofile:follow_profile_view' request.user.profile_slug user_profile.profile_slug %}" class="left-meta-btn">Follow</a>
+          <a href="{% url 'uprofile:follow_profile_view' user_profile.profile_slug %}" class="left-meta-btn">Follow</a>
         </div>
         {% else %}
         <div class="lmi-div">
-          <a href="{% url 'uprofile:follow_profile_view' request.user.profile_slug user_profile.profile_slug %}" class="left-meta-btn left-meta-btn-followed">Followed</a>
+          <a href="{% url 'uprofile:follow_profile_view' user_profile.profile_slug %}" class="left-meta-btn left-meta-btn-followed">Followed</a>
         </div>
         {% endif %}
         {% endif %}

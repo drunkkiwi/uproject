@@ -17,7 +17,7 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'password1', 'password2', 'profile_year', 'profile_sex', 'profile_image', 'profile_song')
 
 class ConfessionsForm(forms.ModelForm):
-    confession_title        = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Some confession title?', 'autocomplete': 'off', 'onfocus': 'this.placeholder=""', 'onblur': 'this.placeholder="Some confession title?"'}))
+    confession_title        = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'placeholder': 'Some confession title? (Optional)', 'autocomplete': 'off', 'onfocus': 'this.placeholder=""', 'onblur': 'this.placeholder="Some confession title? (Optional)"'}))
     confession_body         = forms.CharField(max_length=10000, required=True, widget=forms.Textarea(attrs={'placeholder': 'What confession do you have in mind?', 'onfocus': 'this.placeholder=""', 'onblur': 'this.placeholder="What confession do you have in mind?"'}))
 
     class Meta:

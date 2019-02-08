@@ -87,7 +87,6 @@ textarea {
   position: fixed;
   min-width: 100%;
   z-index: 100;
-  overflow: hidden;
 
   clear: both;
 }
@@ -136,12 +135,23 @@ textarea {
   font-size: 20px;
 }
 
+.mn-i-noc {
+  font-size: 20px;
+}
+
 .mn-tx {
   color: var(--main-text-color);
   font-size: 18px;
   margin-left: 10px;
   text-transform: lowercase;
 }
+
+.mn-tx-noc {
+  font-size: 18px;
+  margin-left: 10px;
+  text-transform: lowercase;
+}
+
 
 .mn-undbar {
   height: 1px;
@@ -206,16 +216,95 @@ textarea {
     font-family: 'Oxygen', sans-serif;
     font-weight: 400;
     font-size: 16px;
+    border-radius: 3px;
 }
 
 [data-title] {
     position: relative;
 }
 
+
+/* ------------------------ sex colors --------------------------- */
 .lmi-f {
   color: var(--female-main-color);
 }
 
 .lmi-m {
   color: var(--male-main-color);
+}
+
+
+/* ---------------------- Notification colors -------------------------- */
+.mn-it-notification {
+  color: var(--main-highlight-color);
+  font-weight: 800;
+  margin-right: 5px;
+}
+
+.mn-it-neut {
+  color: var(--soothed-text-color);
+}
+
+
+/* ----------------------- drop-down --------------------------- */
+
+.mn-wrapper {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  position: relative;
+}
+
+.mn-drop-list {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  max-height: 340px;
+  width: 300px;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--lighter-background-color);
+  display: flex;
+  flex-direction: column;
+  border-bottom: none;
+  z-index: 901;
+  visibility: hidden;
+  opacity: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: auto;
+}
+
+.mn-usr-photo {
+  min-height: 40px;
+  min-width: 40px;
+  height: 40px;
+  width: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 10px;
+  float: left;
+}
+
+.mn-drop-item {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--lighter-background-color);
+  color: var(--soothed-text-color);
+  display: flex;
+}
+
+.mn-drop-list-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mn-drop-item-new {
+  box-sizing: border-box;
+  border-left: 1px solid var(--main-highlight-color);
 }

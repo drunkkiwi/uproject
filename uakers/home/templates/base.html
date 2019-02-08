@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% load static %}
+    {% load main_external_filters %}
 
     <!-- meta -->
     <meta charset="utf-8">
@@ -15,6 +16,7 @@
 
     <!-- external -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     {% block external %}
     {% endblock %}
 
@@ -25,6 +27,7 @@
     <!-- css -->
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <link rel="stylesheet" href="{% static 'base850.css' %}" media="screen and (min-width: 0px) and (max-width: 850px)">
+
     {% block css %}
     {% endblock %}
   </head>
@@ -37,6 +40,39 @@
       </a>
 
       <div class="nav-menu">
+
+        {% if user.is_authenticated %}
+        {% get_notification_number request.user as the_notification_number %}
+        <div class="mn-wrapper">
+          <a href="#" class="mn-it {% if the_notification_number is not 0 %} mn-it-notification{% else %} mn-it-neut {% endif %}">
+
+            <i class="fas fa-fire-alt mn-i-noc"></i>
+            <span class="mn-tx-noc live_notification_number" data-href="{% url 'notifications:live_notification_list_view' %}">{{ the_notification_number }}</span>
+            <div class="mn-undbar"></div>
+
+          </a>
+
+          {% get_notification_list request.user as the_notficiation_list %}
+          <div class="mn-drop-list">
+            {% for notification in the_notficiation_list %}
+
+            <a href="{% if notification.notification_type == 'follow' %}{% url 'uprofile:profile_view' notification.notification_init.profile_slug %}{% elif notification.notification_type == 'likeConf' %}{% url 'home:confession_view' notification.notification_target %}{% endif %}">
+              <div class="mn-drop-item {% if notification.notification_sent %}{% else %}mn-drop-item-new{% endif %}">
+                <span class="mn-usr-photo" style="background-image: url({{ notification.notification_init.profile_image }})"></span>
+                {{ notification.notification_init.username }}
+                {% if notification.notification_type == 'follow' %}
+                followed you
+                {% elif notification.notification_type == 'likeConf' %}
+                liked your confession
+                {% elif notification.notification_type == 'likeCom' %}
+                liked your comment
+                {% endif %}
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
 
         <a href="{% url 'home:home_view' %}" class="mn-it">
 
@@ -82,7 +118,10 @@
     {% endblock %}
 
 
+    <script type="text/javascript" src="{% static 'home/js/base.js' %}"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'notifications/js/live_notification_view.js' %}"></script>
+
     {% block js %}
     {% endblock %}
   </body>
