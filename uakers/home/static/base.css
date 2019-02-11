@@ -308,3 +308,10 @@ textarea {
   box-sizing: border-box;
   border-left: 1px solid var(--main-highlight-color);
 }
+
+.notification_opaque {
+  font-size: 12px;
+  color: var(--opaque-text-color);
+  display: inline;
+  font-weight: 300;
+}

@@ -21,14 +21,11 @@ def m_or_f_color(user_profile):
 
 @register.simple_tag()
 def get_notification_number(user):
-    return Notification.objects.filter(notification_rec=user, notification_read=False, notification_sent=False).count()
+    return Notification.objects.filter(notification_rec=user, notification_read=False).count()
 
 
 
 @register.simple_tag()
 def get_notification_list(user):
-    notifications = Notification.objects.filter(notification_rec=user).order_by('-id')[:10]
-    for notification in notifications:
-        notification.notification_sent = True
-        notification.save()
+    notifications = Notification.objects.filter(notification_rec=user).order_by('-id')[:5]
     return notifications

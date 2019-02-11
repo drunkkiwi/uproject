@@ -4,6 +4,8 @@
     {% load static %}
     {% load main_external_filters %}
 
+    {% load humanize %}
+
     <!-- meta -->
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
@@ -47,26 +49,34 @@
           <a href="#" class="mn-it {% if the_notification_number is not 0 %} mn-it-notification{% else %} mn-it-neut {% endif %}">
 
             <i class="fas fa-fire-alt mn-i-noc"></i>
-            <span class="mn-tx-noc live_notification_number" data-href="{% url 'notifications:live_notification_list_view' %}">{{ the_notification_number }}</span>
+            <span class="mn-tx-noc live_notification_number" data-href="{% url 'notifications:live_notification_list_view' %}" data-href-read="{% url 'notifications:read_notification_list_view' %}">{{ the_notification_number }}</span>
             <div class="mn-undbar"></div>
 
           </a>
 
           {% get_notification_list request.user as the_notficiation_list %}
           <div class="mn-drop-list">
+            {% if not the_notficiation_list %}
+            <div class="mn-drop-item">You have no notifications</div>
+            {% endif %}
             {% for notification in the_notficiation_list %}
 
             <a href="{% if notification.notification_type == 'follow' %}{% url 'uprofile:profile_view' notification.notification_init.profile_slug %}{% elif notification.notification_type == 'likeConf' %}{% url 'home:confession_view' notification.notification_target %}{% endif %}">
-              <div class="mn-drop-item {% if notification.notification_sent %}{% else %}mn-drop-item-new{% endif %}">
+              <div class="mn-drop-item {% if not notification.notification_read %}mn-drop-item-new{% endif %}">
                 <span class="mn-usr-photo" style="background-image: url({{ notification.notification_init.profile_image }})"></span>
-                {{ notification.notification_init.username }}
-                {% if notification.notification_type == 'follow' %}
-                followed you
-                {% elif notification.notification_type == 'likeConf' %}
-                liked your confession
-                {% elif notification.notification_type == 'likeCom' %}
-                liked your comment
-                {% endif %}
+                <p>
+                  {{ notification.notification_init.username }}
+                  {% if notification.notification_type == 'follow' %}
+                  followed you
+                  {% elif notification.notification_type == 'likeConf' %}
+                  liked your confession
+                  {% elif notification.notification_type == 'likeCom' %}
+                  liked your comment
+                  {% endif %}
+                  <span class="notification_opaque">
+                    -- {{ notification.notification_created_at|naturaltime }}
+                  </span>
+                </p>
               </div>
             </a>
             {% endfor %}

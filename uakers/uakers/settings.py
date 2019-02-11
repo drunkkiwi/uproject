@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # ---- django added ----
+    'django.contrib.humanize',
 ]
 
 AUTH_USER_MODEL = 'home.UserProfile'

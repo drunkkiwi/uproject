@@ -95,7 +95,7 @@ def confession_view(request, confession_slug):
         unique_confession.save()
 
     context = {
-        'unique_confession': unique_confession,
+        'cons': unique_confession,
         'all_confession_comments': all_confession_comments,
         'co_form': co_form,
     }

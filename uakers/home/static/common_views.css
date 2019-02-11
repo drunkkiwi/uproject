@@ -28,7 +28,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 12px 12px 6px 12px;
 }
 
 .co_photo_meta_div {
@@ -79,6 +79,7 @@
 .co-up-text {
   box-sizing: border-box;
   color: var(--soothed-text-color);
+  margin-top: 7px;
 }
 
 .co-aut-year {
@@ -91,10 +92,11 @@
 .co-aut {
   font-size: 16px;
   font-weight: 700;
+  transition: all 0.1s ease-in-out;
 }
 
 .co-aut:hover {
-  color: var(--main-text-color);
+  text-decoration: underline;
 }
 
 .co-at-ico {

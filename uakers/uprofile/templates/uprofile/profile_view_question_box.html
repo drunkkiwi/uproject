@@ -1,4 +1,5 @@
 {% load main_external_filters %}
+{% load humanize %}
 <div class="quans_container">
 
   <div class="quans_box qb_que">
@@ -17,7 +18,7 @@
           {{ cons.question_author.profile_nickname }}
         </p>
         <p class="quans_meta_username">
-          @{{ cons.question_author.username }} --- {{ cons.date_created_at }}
+          @{{ cons.question_author.username }} --- {{ cons.date_created_at|naturaltime }}
         </p>
       </div>
       {{ cons.question_body|linebreaks }}
@@ -51,7 +52,7 @@
            {{ answer.answer_author.profile_nickname }}
         </p>
         <p class="quans_meta_username {{answer.answer_author}}">
-          @{{ answer.answer_author.username }} --- {{ answer.answer_created_at }}
+          @{{ answer.answer_author.username }} --- {{ answer.answer_created_at|naturaltime }}
         </p>
       </div>
       {{ answer.answer_body|linebreaks }}

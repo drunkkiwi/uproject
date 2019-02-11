@@ -2,16 +2,40 @@ document.addEventListener('DOMContentLoaded', function(){
 
   let mn_wrapper = document.getElementsByClassName('mn-wrapper')[0];
 
-  mn_wrapper.addEventListener('click', function(){
+  if (mn_wrapper){
+    mn_wrapper.addEventListener('click', function(){
 
-    let mn_drop_list = document.getElementsByClassName('mn-drop-list')[0];
+      let lnn = document.getElementsByClassName('live_notification_number')[0];
+      let live_href_read = lnn.getAttribute('data-href-read');
 
-    if(mn_drop_list.classList.contains('mn-drop-list-active')){
-      mn_drop_list.classList.remove('mn-drop-list-active');
-    } else {
-      mn_drop_list.classList.add('mn-drop-list-active');
-    }
+      let mn_drop_list = document.getElementsByClassName('mn-drop-list')[0];
 
-  });
+      if(mn_drop_list.classList.contains('mn-drop-list-active')){
+        mn_drop_list.classList.remove('mn-drop-list-active');
+      } else {
+        mn_drop_list.classList.add('mn-drop-list-active');
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        function fetch_live_list(){
+          $.ajax({
+            type: "POST",
+            url: live_href_read,
+
+            success: function(data){
+            }
+          });
+
+        }
+      }
+
+    });
+  }
 
 });

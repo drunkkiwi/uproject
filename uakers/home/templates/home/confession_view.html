@@ -11,6 +11,7 @@
 
 
 {% block css %}
+  <link rel="stylesheet" href="{% static 'common_views.css' %}">
   <link rel="stylesheet" href="{% static 'home/css/confession_view.css' %}">
   <link rel="stylesheet" href="{% static 'home/css/confession_view900.css' %}" media="screen and (min-width: 0px) and (max-width: 900px)">
 {% endblock %}
@@ -27,7 +28,7 @@
   <div class="rest-div">
 
     <div class="rest-co">
-      {% include 'home/confession_view_confession_box.html' %}
+      {% include 'home/confession_box.html' %}
 
       <div class="co-comments">
         {% if request.user.is_authenticated %}

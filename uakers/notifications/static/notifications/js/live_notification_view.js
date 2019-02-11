@@ -42,13 +42,14 @@ function fetch_live_list(){
 
     success: function(data){
       let drplist = document.getElementsByClassName('mn-drop-list')[0];
-      for (let z=0; z<data.live_notification_list.length; z++){
-        console.log(data.live_notification_list[z]);
-        console.log(drplist);
-        let lnn = document.getElementsByClassName('live_notification_number')[0];
-        lnn.innerHTML = data.live_notification_count;
-        let newdata = data.live_notification_list[z];
+      let newdatait = data.live_notification_list;
+      let lnn = document.getElementsByClassName('live_notification_number')[0];
+      lnn.innerHTML = data.live_notification_count;
+      for (let z=0; z<newdatait.length; z++){
+
         let extraS = '';
+
+        newdata = newdatait[z]
 
         if (newdata.notification_type == 'follow'){
           extraS = 'followed you';
@@ -60,7 +61,7 @@ function fetch_live_list(){
 
         let htmlel = document.createElement('a');
         htmlel.setAttribute('href', newdata.notification_url);
-        htmlel.innerHTML = '<div class="mn-drop-item mn-drop-item-new"><div class="mn-usr-photo" style="background-image: url(' + newdata.notification_image + ')"></div>' + newdata.notification_init + ' ' + extraS + '</div>';
+        htmlel.innerHTML = '<div class="mn-drop-item mn-drop-item-new"><div class="mn-usr-photo" style="background-image: url(' + newdata.notification_image + ')"></div>' + '<p>' + newdata.notification_init + ' ' + extraS + '-' + '<span class="notification_opaque">' + newdata.notification_created_at + '</span></p>' + '</div>';
         drplist.insertBefore(htmlel, drplist.firstChild);
       }
     }
@@ -69,4 +70,4 @@ function fetch_live_list(){
 }
 
 
-setInterval(fetch_live_list, 5000)
+setInterval(fetch_live_list, 5000);
