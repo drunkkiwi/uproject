@@ -57,11 +57,13 @@ function fetch_live_list(){
           extraS = 'liked your confession';
         } else if (newdata.notification_type == 'likeCom'){
           extraS = 'liked your comment';
+        } else if (newdata.notification_type == 'commentConf'){
+          extraS = 'commented on your confession';
         }
 
         let htmlel = document.createElement('a');
         htmlel.setAttribute('href', newdata.notification_url);
-        htmlel.innerHTML = '<div class="mn-drop-item mn-drop-item-new"><div class="mn-usr-photo" style="background-image: url(' + newdata.notification_image + ')"></div>' + '<p>' + newdata.notification_init + ' ' + extraS + '-' + '<span class="notification_opaque">' + newdata.notification_created_at + '</span></p>' + '</div>';
+        htmlel.innerHTML = '<div class="mn-drop-item mn-drop-item-new"><div class="mn-usr-photo" style="background-image: url(' + newdata.notification_image + ')"></div>' + '<p>' + newdata.notification_init + ' ' + extraS + ' -- ' + '<span class="notification_opaque">' + newdata.notification_created_at + '</span></p>' + '</div>';
         drplist.insertBefore(htmlel, drplist.firstChild);
       }
     }

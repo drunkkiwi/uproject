@@ -72,6 +72,8 @@
                   liked your confession
                   {% elif notification.notification_type == 'likeCom' %}
                   liked your comment
+                  {% elif notification.notification_type == 'commentConf' %}
+                  commented on your confession
                   {% endif %}
                   <span class="notification_opaque">
                     -- {{ notification.notification_created_at|naturaltime }}

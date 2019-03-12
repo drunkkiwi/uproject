@@ -34,7 +34,9 @@ def live_notification_list_view(request):
             elif notification.notification_type == 'likeConf':
                 struct['notification_url'] = reverse('home:confession_view', args=[notification.notification_target])
             elif notification.notification_type == 'likeCom':
-                struct['notification_url'] = reverse('home:confession_view') + '/' + str(notification.notification_target)
+                struct['notification_url'] = reverse('home:confession_view', args=[notification.notification_target])
+            elif notification.notification_type == 'commentConf':
+                struct['notification_url'] = reverse('home:confession_view', args=[notification.notification_target])
 
         if notification.notification_type:
             struct['notification_type'] = str(notification.notification_type)

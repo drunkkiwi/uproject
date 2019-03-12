@@ -79,6 +79,7 @@ def confession_view(request, confession_slug):
             temp.comment_author = request.user
             temp.comment_confession = unique_confession
             temp.save()
+            Notification.objects.create(notification_init=temp.comment_author, notification_rec=temp.comment_confession.confession_author, notification_type='commentConf', notification_target=temp.comment_confession.confession_slug)
             return redirect(redirect_next_page)
 
         return redirect('home:confession_view')
@@ -152,9 +153,9 @@ def upvote_view(request, co_type, co_slug):
                 upvote_co.save()
                 alert_message = "Upvoted"
 
-                notification_slug = str(upvote_co.confession_slug)
+                notification_slug = str(upvote_co.comment_confession.confession_slug)
                 if not request.user == upvote_co.comment_author:
-                    Notification.objects.create(notification_init=request.user, notification_rec=upvote_co.confession_author, notification_type='likeCom', notification_target=notification_slug)
+                    Notification.objects.create(notification_init=request.user, notification_rec=upvote_co.comment_author, notification_type='likeCom', notification_target=notification_slug)
 
             alert_upvote_int = upvote_co.comment_upvotes_int
 
@@ -233,8 +234,6 @@ def downvote_view(request, co_type, co_slug):
 
 
 # ------------ AUTHENTICATION VIEWS ------------------------
-
-#-------------- LOGIN VIEW ---------------------------------
 
 # ---------------- SIGN UP VIEW ----------------------------
 def sign_up_view(request):
