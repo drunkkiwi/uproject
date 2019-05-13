@@ -9,6 +9,7 @@ class Notification(models.Model):
     notification_rec              = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='notify_rec')
     notification_type             = models.CharField(max_length=255)
     notification_target           = models.CharField(max_length=255, blank=True, null=True)
+    notification_recieved         = models.BooleanField(default=False)
     notification_read             = models.BooleanField(default=False)
     notification_created_at       = models.DateTimeField(auto_now_add=True)
 

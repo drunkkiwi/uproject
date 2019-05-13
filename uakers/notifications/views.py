@@ -12,7 +12,7 @@ from django.contrib.humanize.templatetags.humanize  import naturaltime
 def live_notification_list_view(request):
 
     # --------------- notification list and notification number ----------------------
-    live_notification_list = Notification.objects.filter(notification_rec=request.user, notification_read=False).all()
+    live_notification_list = Notification.objects.filter(notification_rec=request.user, notification_recieved=False).all()
 
     live_notification_count = Notification.objects.filter(notification_rec=request.user, notification_read=False).count()
 
@@ -21,8 +21,8 @@ def live_notification_list_view(request):
 
     # ------------------------ notification structure -----------------------------
     for notification in live_notification_list:
-        if notification.notification_read == False:
-            notification.notification_read = True
+        if notification.notification_recieved == False:
+            notification.notification_recieved = True
             notification.save()
 
         struct = model_to_dict(notification)
@@ -55,15 +55,20 @@ def live_notification_list_view(request):
 
 
 def read_notification_list_view(request):
-    all_req_notifications = Notification.objects.filter(notification_rec=request.user, notification_read=False)[:50]
+
+    all_req_notifications = Notification.objects.filter(notification_rec=request.user, notification_read=False)
+
+    func_status = 'Done'
+
 
     for notification in all_req_notifications:
         notification.notification_read = True
         notification.save()
 
 
+
     data = {
-        'notification_read': all_req_notifications[0].notification_read,
+        'func_status': func_status,
     }
 
     return JsonResponse(data)

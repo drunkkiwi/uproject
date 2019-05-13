@@ -1,7 +1,7 @@
 body {
   background-color: var(--main-background-color);
-  /*background-image: url('https://i.pinimg.com/originals/53/a8/08/53a808759b1edf0ae0b73c711475faf8.gif');*/
   background-image: url('https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-image: url('https://theinspirationgrid.com/app/uploads/2017/10/photography-neon-dreams-02-805x537.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

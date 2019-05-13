@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block title %}
-{% if unique_confession.confession_title %}
-{{ unique_confession.confession_title }}
+{% if cons.confession_title %}
+{{ cons.confession_title }}
 {% else %}
-{{ unique_confession.confession_body|truncatechars:60 }}
+{{ cons.confession_body|truncatechars:60 }}
 {% endif %}
 {% endblock %}
 

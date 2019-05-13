@@ -44,7 +44,7 @@
             {{ user_questions.count }}
           </span>
           <a href="{% url 'uprofile:followed_view' user_profile.profile_slug %}" class="left-meta-info">
-            Followed:
+            Followers:
             {{ user_profile|rec_followed_by }}
           </a>
           <a href="{% url 'uprofile:following_view' user_profile.profile_slug %}" class="left-meta-info">

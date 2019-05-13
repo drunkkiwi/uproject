@@ -17,15 +17,3 @@ def m_or_f_color(user_profile):
         morf = ''
 
     return morf
-
-
-@register.simple_tag()
-def get_notification_number(user):
-    return Notification.objects.filter(notification_rec=user, notification_read=False).count()
-
-
-
-@register.simple_tag()
-def get_notification_list(user):
-    notifications = Notification.objects.filter(notification_rec=user).order_by('-id')[:5]
-    return notifications

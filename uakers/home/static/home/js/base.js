@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         });
 
-        function fetch_live_list(){
+        function read_notification(){
           $.ajax({
             type: "POST",
             url: live_href_read,
@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function(){
           });
 
         }
+
+        read_notification();
       }
 
     });

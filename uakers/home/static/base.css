@@ -21,6 +21,7 @@
   /* ------------- Colors ---------------- */
 
   --main-highlight-color: #ff0058;
+  --main-highlight-color: #bc0041;
   --darker-highlight-color: #D9004B;
   --opaque-highlight-color: rgba(255, 0, 88, 0.6);
   --secondary-highlight-color: #ff4021;
@@ -78,8 +79,8 @@ textarea {
 }
 
 .full-nav {
-  height: 50px;
-  max-height: 50px;
+  height: 55px;
+  max-height: 55px;
   background-color: var(--darker-background-color);
 
   position: absolute;
@@ -104,8 +105,8 @@ textarea {
 }
 
 .nav-logo {
-  height: 30px;
-  max-height: 30px;
+  height: 47px;
+  max-height: 47px;
 }
 
 .nav-menu {
@@ -132,11 +133,26 @@ textarea {
 
 .mn-i {
   color: var(--main-text-color);
-  font-size: 20px;
+  font-size: 23px;
+}
+
+.mn-exit {
+  color: var(--opaque-text-color);
 }
 
 .mn-i-noc {
-  font-size: 20px;
+  font-size: 23px;
+  position: relative;
+}
+
+.mn-notification-sign {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+  color: var(--main-background-color);
+  padding: 2px;
+  background-color: var(--darker-highlight-color);
 }
 
 .mn-tx {
@@ -147,7 +163,7 @@ textarea {
 }
 
 .mn-tx-noc {
-  font-size: 18px;
+  font-size: 25px;
   margin-left: 10px;
   text-transform: lowercase;
 }

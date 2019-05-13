@@ -3,6 +3,7 @@
   <head>
     {% load static %}
     {% load main_external_filters %}
+    {% load main_notification_tags %}
 
     {% load humanize %}
 
@@ -25,6 +26,7 @@
     <!-- default font -->
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Signika+Negative" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="{% static 'base.css' %}">
@@ -46,10 +48,11 @@
         {% if user.is_authenticated %}
         {% get_notification_number request.user as the_notification_number %}
         <div class="mn-wrapper">
-          <a href="#" class="mn-it {% if the_notification_number is not 0 %} mn-it-notification{% else %} mn-it-neut {% endif %}">
+          <a href="#" class="mn-it {% if the_notification_number is not 0 %} mn-it-notification{% else %} mn-it-neut {% endif %}" title="Notifications">
 
-            <i class="fas fa-fire-alt mn-i-noc"></i>
-            <span class="mn-tx-noc live_notification_number" data-href="{% url 'notifications:live_notification_list_view' %}" data-href-read="{% url 'notifications:read_notification_list_view' %}">{{ the_notification_number }}</span>
+            <i class="fas fa-fire-alt mn-i-noc">
+              <span class="mn-notification-sign live_notification_number" data-href="{% url 'notifications:live_notification_list_view' %}" data-href-read="{% url 'notifications:read_notification_list_view' %}">{{ the_notification_number }}</span>
+            </i>
             <div class="mn-undbar"></div>
 
           </a>
@@ -86,35 +89,35 @@
         </div>
         {% endif %}
 
-        <a href="{% url 'home:home_view' %}" class="mn-it">
+        <a href="{% url 'home:home_view' %}" class="mn-it" title="Hub">
 
-          <i class="fas fa-beer mn-i"></i>
-          <span class="mn-tx">confessions</span>
+          <i class="fas fa-glass-martini-alt mn-i"></i>
+          <!--<span class="mn-tx">confessions</span>-->
           <div class="mn-undbar {% block mn-co-underbar-up %}{% endblock %}"></div>
 
         </a>
 
         {% if user.is_authenticated %}
-        <a href="{% url 'uprofile:profile_view' %}" class="mn-it">
+        <a href="{% url 'uprofile:profile_view' %}" class="mn-it" title="Profile">
 
           <i class="fas fa-user-astronaut mn-i"></i>
-          <span class="mn-tx">profile</span>
+          <!--<span class="mn-tx">profile</span>-->
           <div class="mn-undbar {% block upro-underbar-up %}{% endblock %}"></div>
 
         </a>
 
-        <a href="{% url 'home:log_out_view' %}" class="mn-it">
 
-          <i class="fas fa-basketball-ball mn-i"></i>
-          <span class="mn-tx">log out</span>
+        <a href="{% url 'home:log_out_view' %}" class="mn-it" title="Log out">
+
+          <i class="fas fa-sign-out-alt mn-i mn-exit"></i>
           <div class="mn-undbar"></div>
 
         </a>
-        {% else %}
-        <a href="{% url 'home:log_in_view' %}" class="mn-it">
 
-          <i class="fas fa-mug-hot mn-i"></i>
-          <span class="mn-tx">log in | sign up</span>
+        {% else %}
+        <a href="{% url 'home:log_in_view' %}" class="mn-it" title="Log in or sign up">
+
+          <i class="fas fa-sign-in-alt mn-i"></i>
           <div class="mn-undbar {% block liv_su_underbar %}{% endblock %}"></div>
 
         </a>
