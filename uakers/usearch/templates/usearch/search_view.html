@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{raw_search_query}}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'common_views.css' %}">
+<link rel="stylesheet" href="{% static 'usearch/css/search_view.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <div class="search_options">
+    <form class="s_type" action="{% url 'usearch:search_view' %}" method="GET">
+      <span class="so_tx {% if raw_search_type == 'people' %} so_tx_highlight{% endif %}">People</span>
+      <input type="hidden" name="q" value="{{ raw_search_query }}">
+      <input type="hidden" name="q_type" value="people">
+    </form>
+    <form class="s_type" action="{% url 'usearch:search_view' %}" method="GET">
+      <span class="so_tx {% if raw_search_type == 'confessions' %} so_tx_highlight{% endif %}">Confessions</span>
+      <input type="hidden" name="q" value="{{ raw_search_query }}">
+      <input type="hidden" name="q_type" value="confessions">
+    </form>
+
+  </div>
+
+  <div class="search_announce">
+    <p class="sa_tx">{{ st_formatted }} matching with the search: <span class="sa_tx_highlight">{{ raw_search_query }}</span></p>
+  </div>
+
+  {% if raw_search_type == 'people' %}
+  <div class="search_results_p">
+    {% for follow_user in query_content %}
+    {% include "uprofile/follow_view_box.html" %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if raw_search_type == 'confessions' %}
+  <div class="search_results_c">
+    {% for cons in query_content %}
+    {% include 'home/confession_box.html' %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+
+  <script type="text/javascript" src="{% static 'usearch/js/search_view.js' %}"></script>
+
+{% endblock %}

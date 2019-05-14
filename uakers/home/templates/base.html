@@ -24,9 +24,7 @@
     {% endblock %}
 
     <!-- default font -->
-    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Signika+Negative" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700,800,900" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="{% static 'base.css' %}">
@@ -42,6 +40,17 @@
       <a href="{% url 'home:home_view' %}" class="nav-logo-div">
         <img class="nav-logo" src="{% static 'assets/uakers-logo.png' %}">
       </a>
+
+      <div class="search_div">
+        <form class="search_form" action="{% url 'usearch:search_view' %}" method="GET">
+          {% csrf_token %}
+          <button class="search_btn" type="submit" name="button">
+            <i class="fas fa-search"></i>
+          </button>
+          <input class="search_inp" type="text" name="q" autocomplete="off" placeholder="Search uakers">
+          <input type="hidden" name="q_type" value="people">
+        </form>
+      </div>
 
       <div class="nav-menu">
 

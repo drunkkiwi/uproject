@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'uprofile.apps.UprofileConfig',
     'notifications.apps.NotificationsConfig',
+    'usearch.apps.UsearchConfig',
 
     # ----- djangoo -----
     'django.contrib.admin',

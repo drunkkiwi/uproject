@@ -1,6 +1,6 @@
 body {
   /*background-image: url('https://i.pinimg.com/originals/45/9d/db/459ddbb53bb2c675d46ac75d83bce93f.gif');*/
-  background-image: url('https://images.pexels.com/photos/417054/pexels-photo-417054.jpeg');
+  background-image: url('https://images.pexels.com/photos/1759702/pexels-photo-1759702.jpeg');
   background-position: center;
   background-size: 100%;
   background-repeat: repeat-y;
@@ -8,7 +8,7 @@ body {
 
 .bg-overlayer {
   background-color: var(--main-background-color);
-  opacity: 0.8;
+  opacity: 0.9;
   position: fixed;
   width: 100%;
   height: 100%;

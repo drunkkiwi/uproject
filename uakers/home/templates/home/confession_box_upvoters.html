@@ -1,0 +1,13 @@
+<div class="co_voters">
+
+  <div class="follow_container">
+    {% for follow_user in cons.confession_upvotes.all %}
+    {% include 'uprofile/follow_view_box.html' %}
+    {% endfor %}
+  </div>
+
+  <div class="co_remove_layer">
+    <i class="fas fa-times co_remove_trigg"></i>
+  </div>
+
+</div>

@@ -40,4 +40,35 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
+
+  let co_upd_iu = document.getElementsByClassName('co-upd-iu');
+
+
+  for (let cui=0; cui<co_upd_iu.length; cui++){
+    co_upd_iu[cui].addEventListener('click', function(){
+
+      let co_voters = co_upd_iu[cui].parentNode.parentNode.parentNode.getElementsByClassName('co_voters')[0];
+
+      co_voters.style.display = "block";
+
+    });
+  }
+
+
+  let co_remove_layer = document.getElementsByClassName('co_remove_layer');
+
+  for(crl=0; crl<co_remove_layer.length; crl++){
+
+    co_remove_layer[crl].addEventListener('click', function(){
+
+      let co_voters_close = this.parentNode;
+      co_voters_close.style.display = 'none';
+
+    });
+  }
+
+  //for(crl=0; crl<co_remove_layer; crl++){
+    //console.log(co_remove_layer[crl]);
+  //}
+
 });

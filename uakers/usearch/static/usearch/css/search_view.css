@@ -1,0 +1,48 @@
+.search_options {
+  border-bottom: 1px solid var(--lighter-background-color);
+  padding: 10px 20px;
+}
+
+.so_tx {
+  color: var(--opaque-text-color);
+  font-size: 20px;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.so_tx:hover, .so_tx_highlight {
+  color: var(--soothed-text-color);
+}
+
+.search_results_p {
+  padding: 50px;
+  display: flex;
+}
+
+.search_results_c {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_announce {
+  padding: 10px 20px 0 20px;
+}
+
+.sa_tx {
+  margin-left: 15px;
+  color: var(--soothed-text-color);
+  font-size: 19px;
+}
+
+.sa_tx_highlight {
+  font-size: 19px;
+  color: var(--main-highlight-color);
+  font-weight: 900;
+}
+
+.confession_box {
+  width: 650px;
+}

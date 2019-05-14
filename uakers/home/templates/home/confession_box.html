@@ -21,6 +21,7 @@
       <div class="co-up-text">
         <a href="{% url 'home:confession_view' cons.confession_slug %}" class="co-title">{{ cons.confession_title|truncatechars:60 }}</a>
       </div>
+
     </div>
 
     <a href="{% url 'home:confession_view' cons.confession_slug %}">
@@ -28,6 +29,7 @@
         {{ cons.confession_body|linebreaks|truncatewords:60 }}
       </div>
     </a>
+
   </div>
 
   <div class="co-rank">
@@ -71,5 +73,8 @@
   </form>
   {% endif %}
   {% endif %}
+
+  {% include 'home/confession_box_upvoters.html' %}
+
 
 </div>
